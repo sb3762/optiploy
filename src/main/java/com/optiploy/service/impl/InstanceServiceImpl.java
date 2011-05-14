@@ -49,9 +49,9 @@ public class InstanceServiceImpl implements InstanceService
 		return instanceDao.loadReadyInstances();
 	}
 
-	public void deleteAllInstances(int agentId)
+	public void deleteAllInstances(int agentId, String agentName)
 	{
-		instanceDao.deleteAllAgentInstances(agentId);		
+		instanceDao.deleteAllAgentInstances(agentId, agentName);		
 	}
 
 }
