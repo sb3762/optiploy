@@ -154,7 +154,7 @@ public class AgentServer
 		
 		try
 		{			
-			instanceService.deleteAllInstances(agent.getId());
+			instanceService.deleteAllInstances(agent.getId(), agent.getName());
 			
 			for(int i = 0; i < agent.getInstances(); i++)
 			{
