@@ -51,9 +51,13 @@ public class InstanceDaoImpl extends HibernateDaoSupport implements InstanceDao
 		return list;		
 	}
 	
-	public void deleteAllAgentInstances(int agentId)
+	public void deleteAllAgentInstances(int agentId, String agentName)
 	{
-		List<Instance> list = getHibernateTemplate().find("from Instance where agentID=?", agentId);
+		Object[] args = new Object[2];
+		args[0] = agentId;
+		args[1] = agentName;
+		
+		List<Instance> list = getHibernateTemplate().find("select I from Instance I, Agent A where I.agentId = A.id and I.agentId=? or A.name =?", args);
 		getHibernateTemplate().deleteAll(list);		
 	}
 
