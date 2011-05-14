@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+    <property name="url"><value>jdbc:mysql://localhost/Optiploy</value></property>
+    <property name="username"><value>root</value></property>
+    <property name="password"><value>root</value></property>
+  </bean>  
+  
+  <!-- JNDI DataSource for J2EE environments -->
+  <!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/udt"/>-->
+  <!--  
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://localhost/UDT?createDatabaseIfNotExist=true"/>
+       <property name="username" value="root"/>
+       <property name="password" value="root"/>
+       <property name="maxActive" value="100"/>
+       <property name="maxWait" value="1000"/>
+       <property name="poolPreparedStatements" value="true"/>
+       <property name="defaultAutoCommit" value="true"/>
+   </bean>
+   -->
+   
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource"><ref bean="dataSource"/></property>
+    <property name="configLocation"><value>classpath:hibernate.cfg.xml</value></property>
+    <property name="configurationClass"><value>org.hibernate.cfg.AnnotationConfiguration</value></property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>     
+      </props>
+    </property>
+  </bean>
+
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
+
+  <bean id="txAttributeSource"
+    class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+    <property name="properties">
+      <props>
+        <prop key="add*">PROPAGATION_REQUIRED</prop>
+        <prop key="update*">PROPAGATION_REQUIRED</prop>
+        <prop key="remove*">PROPAGATION_REQUIRED</prop>
+        <prop key="send*">PROPAGATION_REQUIRED</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="txInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+    <property name="transactionManager"><ref local="transactionManager"/></property>
+    <property name="transactionAttributeSource"><ref local="txAttributeSource"/></property>
+  </bean>
+
+  <bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <property name="interceptorNames">
+      <list> <idref local="txInterceptor"/></list>
+    </property>
+    <property name="beanNames">
+      <list>
+        <value>*Dao</value>
+        <value>*DAO</value>
+      </list>
+    </property>
+  </bean>
+
+
+  <bean id="daoTmpl" abstract="true">
+    <property name="sessionFactory">
+      <ref bean="sessionFactory"/>
+    </property>
+  </bean>
+
+  <bean id="agentDao" class="com.optiploy.dao.impl.AgentDaoImpl" parent="daoTmpl"/>
+  <bean id="attributeDao" class="com.optiploy.dao.impl.AttributeDaoImpl" parent="daoTmpl"/>
+  <bean id="attributeTypeDao" class="com.optiploy.dao.impl.AttributeTypeDaoImpl" parent="daoTmpl"/>
+  <bean id="applicationDao" class="com.optiploy.dao.impl.ApplicationDaoImpl" parent="daoTmpl"/>
+  <bean id="environmentDao" class="com.optiploy.dao.impl.EnvironmentDaoImpl" parent="daoTmpl"/> 
+  <bean id="functionDao" class="com.optiploy.dao.impl.FunctionDaoImpl" parent="daoTmpl"/> 
+  <bean id="instanceDao" class="com.optiploy.dao.impl.InstanceDaoImpl" parent="daoTmpl"/>
+  <bean id="jobDao" class="com.optiploy.dao.impl.JobDaoImpl" parent="daoTmpl"/>
+  <bean id="logDao" class="com.optiploy.dao.impl.LogDaoImpl" parent="daoTmpl"/>
+  <bean id="logFileDao" class="com.optiploy.dao.impl.LogFileDaoImpl" parent="daoTmpl"/>
+  <bean id="lookupDao" class="com.optiploy.dao.impl.LookupDaoImpl" parent="daoTmpl"/>
+  <bean id="progressDao" class="com.optiploy.dao.impl.ProgressDaoImpl" parent="daoTmpl"/>
+  <bean id="propertyDao" class="com.optiploy.dao.impl.PropertyDaoImpl" parent="daoTmpl"/>
+  <bean id="releaseDao" class="com.optiploy.dao.impl.ReleaseDaoImpl" parent="daoTmpl"/>
+  <bean id="reportDao" class="com.optiploy.dao.impl.ReportDaoImpl" parent="daoTmpl"/>
+  <bean id="reportMenuDao" class="com.optiploy.dao.impl.ReportMenuDaoImpl" parent="daoTmpl"/>
+  <bean id="roleDao" class="com.optiploy.dao.impl.RoleDaoImpl" parent="daoTmpl"/>
+  <bean id="ruleDao" class="com.optiploy.dao.impl.RuleDaoImpl" parent="daoTmpl"/>
+  <bean id="ruleTypeDao" class="com.optiploy.dao.impl.RuleTypeDaoImpl" parent="daoTmpl"/>
+  <bean id="scriptDao" class="com.optiploy.dao.impl.ScriptDaoImpl" parent="daoTmpl"/>
+  <bean id="universalDao" class="com.optiploy.dao.impl.UniversalDaoImpl" parent="daoTmpl"/>
+  <bean id="userDao" class="com.optiploy.dao.impl.UserDaoImpl" parent="daoTmpl"/>
+  
+  <bean id="txProxyTemplate" abstract="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+    <property name="transactionManager"><ref bean="transactionManager"/></property>
+    <property name="transactionAttributes">
+      <props>
+        <prop key="save*">PROPAGATION_REQUIRED</prop>
+        <prop key="add*">PROPAGATION_REQUIRED</prop>
+        <prop key="remove*">PROPAGATION_REQUIRED</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <bean id="userService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="roleService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.RoleServiceImpl">
+        <property name="roleDao" ref="roleDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="applicationService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ApplicationServiceImpl">
+        <property name="applicationDao" ref="applicationDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="agentService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.AgentServiceImpl">
+        <property name="agentDao" ref="agentDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="attributeService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.AttributeServiceImpl">
+        <property name="attributeDao" ref="attributeDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+   <bean id="attributeTypeService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.AttributeTypeServiceImpl">
+        <property name="attributeTypeDao" ref="attributeTypeDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="environmentService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.EnvironmentServiceImpl">
+        <property name="environmentDao" ref="environmentDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="functionService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.FunctionServiceImpl">
+        <property name="functionDao" ref="functionDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="jobService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.JobServiceImpl">
+        <property name="jobDao" ref="jobDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="logService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.LogServiceImpl">
+        <property name="logDao" ref="logDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="logFileService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.LogFileServiceImpl">
+        <property name="logFileDao" ref="logFileDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="instanceService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.InstanceServiceImpl">
+        <property name="instanceDao" ref="instanceDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="progressService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ProgressServiceImpl">
+        <property name="progressDao" ref="progressDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="propertyService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.PropertyServiceImpl">
+        <property name="propertyDao" ref="propertyDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="releaseService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ReleaseServiceImpl">
+        <property name="releaseDao" ref="releaseDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="reportService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ReportServiceImpl">
+        <property name="reportDao" ref="reportDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="reportMenuService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ReportMenuServiceImpl">
+        <property name="reportMenuDao" ref="reportMenuDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="ruleService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.RuleServiceImpl">
+        <property name="ruleDao" ref="ruleDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="ruleTypeService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.RuleTypeServiceImpl">
+        <property name="ruleTypeDao" ref="ruleTypeDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="scriptService" parent="txProxyTemplate">
+    <property name="target">
+      <bean class="com.optiploy.service.impl.ScriptServiceImpl">
+        <property name="scriptDao" ref="scriptDao"/>
+      </bean>
+    </property>
+  </bean>
+  
+  <bean id="optiployProperties" class="com.optiploy.property.OptiployProperties" />
+  
+  <bean id="generalUtil" class="com.optiploy.util.GeneralUtil" />
+  
+  <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+    
+</beans>
+
+

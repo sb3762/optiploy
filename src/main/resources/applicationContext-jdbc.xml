@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+    <property name="url"><value>jdbc:mysql://localhost/Optiploy?createDatabaseIfNotExist=true</value></property>
+    <property name="username"><value>root</value></property>
+    <property name="password"><value>root</value></property>
+  </bean>  
+  
+  <!-- JNDI DataSource for J2EE environments -->
+  <!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/opti"/>-->
+  <!--  
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+       <property name="url" value="jdbc:mysql://localhost/OPTI?createDatabaseIfNotExist=true"/>
+       <property name="username" value="root"/>
+       <property name="password" value="root"/>
+       <property name="maxActive" value="100"/>
+       <property name="maxWait" value="1000"/>
+       <property name="poolPreparedStatements" value="true"/>
+       <property name="defaultAutoCommit" value="true"/>
+   </bean>
+   -->
+     
+</beans>
+
