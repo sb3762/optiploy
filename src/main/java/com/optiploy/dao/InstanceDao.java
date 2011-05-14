@@ -20,6 +20,6 @@ public interface InstanceDao
     List loadReadyInstances();
     
     @Transactional
-    void deleteAllAgentInstances(int agentId);
+    void deleteAllAgentInstances(int agentId, String agentName);
     
 }
