@@ -18,6 +18,6 @@ public interface InstanceService
         
     public List<Instance> getReadyInstances();
     
-    public void deleteAllInstances(int AgentId);
+    public void deleteAllInstances(int agentId, String agentName);
 
 }
