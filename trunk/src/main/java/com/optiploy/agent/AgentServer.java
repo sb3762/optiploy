@@ -68,7 +68,7 @@ public class AgentServer
 				
 				logger.debug("Existing agent updated: " + host);
 			}
-			catch(Exception e)
+			catch(IndexOutOfBoundsException e)
 			{	
 				logger.debug("Adding new agent: " + host);
 				
@@ -87,7 +87,6 @@ public class AgentServer
 				
 				logger.debug("New agent added: " + host);				
 			}	
-			
 			
 			if (!propertyServerVersion.getValue().equals(agent.getVersion()))
 			{
