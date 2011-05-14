@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1//EN" "http://jakarta.apache.org/commons/dtds/validator_1_1.dtd">
+
+<form-validation>
+     <global>
+      <constant>
+        <constant-name>phone</constant-name>
+        <constant-value>^\(?(\d{3})\)?[-| ]?(\d{3})[-| ]?(\d{4})$</constant-value>
+      </constant>
+      <constant>
+        <constant-name>zip</constant-name>
+        <constant-value>^\d{5}\d*$</constant-value>
+      </constant>
+      <constant>
+        <constant-name>currency</constant-name>
+        <constant-value>^\d{1,3}(,?\d{1,3})*\.?(\d{1,2})?$</constant-value>
+      </constant> 
+   </global>
+   <formset>
+   		<form name="user">
+   			  <field property="username" depends="required">
+                  <arg0 key="user.username"/>
+              </field>	 
+   			  <field property="password" depends="required,twofields">
+                  <msg name="twofields" key="errors.twofields"/>
+	                  <arg0 key="user.password"/>
+	                  <arg1 key="user.confirmPassword"/>
+                  <var>
+                    <var-name>secondProperty</var-name>
+                    <var-value>confirmPassword</var-value>
+                  </var>
+              </field>
+              <field property="confirmPassword" depends="required">
+                  <arg0 key="user.confirmPassword"/>
+              </field>
+              <field property="passwordHint" depends="required">
+                  <arg0 key="user.passwordHint"/>
+              </field>             
+              <field property="firstName" depends="required">
+                  <arg0 key="user.firstName"/>
+              </field>
+              <field property="lastName" depends="required">
+                  <arg0 key="user.lastName"/>
+              </field>                          
+              <field property="email" depends="required,email">
+                  <arg0 key="user.email"/>
+              </field>              
+      </form>
+  </formset>
+  <formset>
+   		<form name="role">   			               
+              <field property="name" depends="required">
+                  <arg0 key="roleForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="roleForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
+   		<form name="release">   			               
+              <field property="name" depends="required">
+                  <arg0 key="releaseForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="releaseForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
+   		<form name="application">   			               
+              <field property="name" depends="required">
+                  <arg0 key="applicationForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="applicationForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
+   		<form name="environment">   			               
+              <field property="name" depends="required">
+                  <arg0 key="environmentForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="environmentForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
+   		<form name="function">   			               
+              <field property="name" depends="required">
+                  <arg0 key="functionForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="functionForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
+   		<form name="progress">   			               
+              <field property="name" depends="required">
+                  <arg0 key="progressForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="progressForm.description"/>
+              </field> 
+              <field property="parameter" depends="required">
+                  <arg0 key="progressForm.parameter"/>
+              </field>                        
+      </form>
+  </formset>
+   <formset>
+   		<form name="module">   			               
+              <field property="name" depends="required">
+                  <arg0 key="moduleForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="moduleForm.description"/>
+              </field>                       
+      </form>
+  </formset>
+</form-validation>

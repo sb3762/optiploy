@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans> 
+
+<!-- URL Mapping --> 
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <value>
+                /*.html=viewController
+                /applicationController.do=applicationController
+                /buildController.do=buildController
+                /environmentController.do=environmentController
+                /functionController.do=functionController
+                /roleController.do=roleController
+                /releaseController.do=releaseController
+                /lookupController.do=lookupController
+                /moduleController.do=moduleController
+                /progressController.do=progressController
+                /userController.do=userController
+                /passwordHintController.do=passwordHintController
+            </value>
+        </property>
+    </bean>
+
+<!-- Tiles Configuration -->
+    
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	  	<property name="definitions">
+			<list>
+				<value>/WEB-INF/action-tiles.xml</value>
+			</list>
+		</property>
+		<property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
+	</bean> 
+
+<!-- View Resolvers --> 
+  
+  	<bean id="xmlViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+    	<property name="order" value="0"/>
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+        <property name="order" value="1"/>
+    </bean>
+    
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="ApplicationResources"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>   
+
+<!-- Spring Controllers -->
+
+    <bean id="viewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>    
+    
+<!-- Application Controllers -->
+
+	<bean name="applicationController" class="com.optiploy.web.controller.ApplicationController" >
+    	<property name="formView" value="application"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="applicationService" ref="applicationService" />       
+    </bean>
+    
+    <bean name="buildController" class="com.optiploy.web.controller.BuildController">      	
+    	<property name="buildApplication" ref="buildApplication" />    	
+    </bean>
+    
+    <bean name="environmentController" class="com.optiploy.web.controller.EnvironmentController" >
+    	<property name="formView" value="environment"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="environmentService" ref="environmentService" />       
+    </bean>
+    
+    <bean name="functionController" class="com.optiploy.web.controller.FunctionController" >
+    	<property name="formView" value="function"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="functionService" ref="functionService" />       
+    </bean>
+
+ 	<bean name="userController" class="com.optiploy.web.controller.UserController" >
+    	<property name="formView" value="user"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />       
+        <property name="userService" ref="userService" /> 
+        <property name="roleService" ref="roleService" />            
+    </bean>
+    
+    <bean name="roleController" class="com.optiploy.web.controller.RoleController" >
+    	<property name="formView" value="role"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="roleService" ref="roleService" />       
+    </bean> 
+    
+    <bean name="releaseController" class="com.optiploy.web.controller.ReleaseController" >
+    	<property name="formView" value="release"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="releaseService" ref="releaseService" />       
+    </bean>
+    
+    <bean name="moduleController" class="com.optiploy.web.controller.ModuleController" >
+    	<property name="formView" value="module"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="moduleService" ref="moduleService" />       
+    </bean>
+    
+    <bean name="progressController" class="com.optiploy.web.controller.ProgressController" >
+    	<property name="formView" value="progress"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="progressService" ref="progressService" />       
+    </bean>
+    
+    <bean name="passwordHintController" class="com.optiploy.web.controller.PasswordHintController">
+    	<property name="mailSender" ref="mailSender" /> 
+    	<property name="mailMessage" ref="mailMessage" />
+    	<property name="userService" ref="userService" />    	
+    </bean> 
+    
+    <bean name="lookupController" class="com.optiploy.web.controller.LookupController">    	
+    	<property name="lookupManager" ref="lookupManager" />
+    </bean>
+
+</beans>
