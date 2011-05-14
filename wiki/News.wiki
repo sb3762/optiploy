@@ -1,13 +1,8 @@
-#summary One-sentence summary of this page.
+News of Optiploy 
 
 = Introduction =
 
-Add your content here.
+This is where news and information for Optiploy will be posted
 
 
 = Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
