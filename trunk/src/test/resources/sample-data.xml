@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="user">
+        <column>id</column>
+        <column>username</column>
+        <column>password</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>email</column>
+        <column>password_hint</column>
+        <column>account_enabled</column>
+        <column>account_expired</column>
+        <column>account_locked</column>
+        <column>credentials_expired</column>
+        <row>
+            <value description="id">1</value>
+            <value description="username">admin</value>
+            <value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
+            <value description="first_name">Optiploy</value>
+            <value description="last_name">Admin</value>
+            <value description="email">jwdani@yahoo.com</value>
+            <value description="password_hint"><![CDATA[It is admin]]></value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>        
+    </table>
+    <table name="role">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <row>
+            <value description="id">1</value>
+            <value description="name">ROLE_ADMIN</value>
+            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="name">ROLE_USER</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+    </table>
+    <table name="user_role">
+        <column>user_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="user_id">1</value>
+            <value description="role_id">1</value>
+        </row>
+    </table>
+    <table name="property">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>value</column>
+    	<column>description</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">version</value>
+    		<value description="value">1.0.0</value>
+    		<value description="description">Version of Optiploy</value>
+    	</row>      	
+    	<row>
+    		<value description="id">2</value>
+    		<value description="name">ServletUrl</value>
+    		<value description="value">http://127.0.0.1</value>
+    		<value description="description">Servlet URL</value>
+    	</row>
+    	<row>
+    		<value description="id">3</value>
+    		<value description="name">BuildMonitorInterval</value>
+    		<value description="value">5000</value>
+    		<value description="description">Build Interval</value>
+    	</row>
+    	<row>
+    		<value description="id">4</value>
+    		<value description="name">MakeFileWindows</value>
+    		<value description="value">make.bat</value>
+    		<value description="description">Make file for Windows</value>
+    	</row>
+    	<row>
+    		<value description="id">5</value>
+    		<value description="name">MakeFileUnix</value>
+    		<value description="value">make.sh</value>
+    		<value description="description">Make file for Unix</value>
+    	</row>
+    	<row>
+    		<value description="id">6</value>
+    		<value description="name">BuildTimeout</value>
+    		<value description="value">300000</value>
+    		<value description="description">Build Timeout</value>
+    	</row>
+    	<row>
+    		<value description="id">7</value>
+    		<value description="name">CleanupFiles</value>
+    		<value description="value">true</value>
+    		<value description="description">Cleanup Files</value>
+    	</row>
+    	<row>
+    		<value description="id">8</value>
+    		<value description="name">MinimumDiskSpace</value>
+    		<value description="value">100000</value>
+    		<value description="description">Minimum Disk Space</value>
+    	</row>
+    	<row>
+    		<value description="id">9</value>
+    		<value description="name">LocalTest</value>
+    		<value description="value">true</value>
+    		<value description="description">Local Test Mode</value>
+    	</row>    	  
+    </table>
+    <table name="application">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Test Application 1</value>
+    		<value description="description">Test Application 1</value>
+    	</row>
+    </table>
+    <table name="environment">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Test Environment 1</value>
+    		<value description="description">Test Environment 1</value>
+    	</row>
+    </table>
+    <table name="function">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Make</value>
+    		<value description="description">Make</value>
+    	</row>
+    </table>
+    <table name="progress">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<column>parameter</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Test Progress</value>
+    		<value description="description">Test Progress</value>
+    		<value description="progressId">XXX</value>
+    	</row>
+    </table> 
+    <table name="releases">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">1.0</value>
+    		<value description="description">Release 1.0</value>
+    	</row>
+    </table>
+    <table name="job">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<column>progressId</column>
+    	<column>releaseId</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Test Job</value>
+    		<value description="description">Test Job</value>
+    		<value description="progressId">1</value>
+    		<value description="releaseId">1</value>
+    	</row>
+    </table>
+    <table name="script">
+    	<column>id</column>
+    	<column>name</column>
+    	<column>description</column>
+    	<column>fileName</column>
+    	<column>content</column>
+    	<column>applicationId</column>
+    	<column>environmentId</column>
+    	<column>functionId</column>
+    	<column>version</column>
+    	<row>
+    		<value description="id">1</value>
+    		<value description="name">Test Script</value>
+    		<value description="description">Test Script</value>
+    		<value description="fileName">make.bat</value>
+    		<value description="content">mkdir \Temp\XXX</value>
+    		<value description="applicationId">1</value>
+    		<value description="environmentId">1</value>
+    		<value description="functionId">1</value>
+    		<value description="version">1.0</value>
+    	</row>
+    </table>
+    <table name="job_script">
+    	<column>job_id</column>
+    	<column>script_id</column>
+    	<row>
+    		<value description="job_id">1</value>
+    		<value description="script_id">1</value>    		
+    	</row>
+    </table>	              
+</dataset>
