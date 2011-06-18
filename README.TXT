@@ -12,3 +12,5 @@ Run agent: java -jar Optiploy-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 Run job: http://localhost:8080/buildController.do?jobId=1&Test=Hi 
 
+Log in: http://localhost:8080/login.html
+
