@@ -48,6 +48,10 @@
             <value description="user_id">1</value>
             <value description="role_id">1</value>
         </row>
+        <row>
+            <value description="user_id">1</value>
+            <value description="role_id">2</value>
+        </row>
     </table>
     <table name="property">
     	<column>id</column>
