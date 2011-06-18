@@ -19,7 +19,7 @@ public class RoleController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(RoleController.class);
 	
-	private String method;	
+	private String mode;	
 	private RoleService roleService;
 	private Locale locale;
 	
@@ -68,7 +68,7 @@ public class RoleController extends BaseFormController
 		else 
 		{
 		
-			if(method.equalsIgnoreCase("update"))
+			if(mode.equalsIgnoreCase("update"))
 			{					
 				roleService.update(role);
 				
@@ -78,7 +78,7 @@ public class RoleController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{					
 				roleService.insert(role);				
 				
@@ -90,7 +90,7 @@ public class RoleController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}					
 			
 		}
@@ -104,16 +104,16 @@ public class RoleController extends BaseFormController
 	{
 		Role role = (Role) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}	
 					
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			role = new Role();						
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			role = (Role) roleService.findById(Integer.parseInt(request.getParameter("id")));
 		}

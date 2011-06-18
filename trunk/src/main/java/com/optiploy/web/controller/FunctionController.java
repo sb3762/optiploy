@@ -19,7 +19,7 @@ public class FunctionController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(FunctionController.class);
 	
-	private String method;	
+	private String mode;	
 	private FunctionService functionService;
 	private Locale locale;
 	
@@ -68,7 +68,7 @@ public class FunctionController extends BaseFormController
 		else 
 		{
 		
-			if(method.equalsIgnoreCase("update"))
+			if(mode.equalsIgnoreCase("update"))
 			{	
 				functionService.update(function);
 				
@@ -78,7 +78,7 @@ public class FunctionController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{	
 				functionService.insert(function);
 								
@@ -90,7 +90,7 @@ public class FunctionController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}					
 			
 		}
@@ -104,16 +104,16 @@ public class FunctionController extends BaseFormController
 	{
 		Function function = (Function) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}	
 					
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			function = new Function();						
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			function = (Function) functionService.findById(Integer.parseInt(request.getParameter("id")));
 		}		

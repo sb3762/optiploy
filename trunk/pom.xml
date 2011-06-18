@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.opti</groupId>
+  <groupId>com.optiploy</groupId>
   <artifactId>Optiploy</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -336,8 +336,8 @@
     <dbunit.skip>true</dbunit.skip>
     <dbunit.transaction>true</dbunit.transaction>
     
-    <jdom.version>1.1</jdom.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdom.version>1.1</jdom.version>    
     <jsp.version>2.0</jsp.version>  
     <jstl.version>1.1.2</jstl.version>
     <javax.mail>1.4</javax.mail> 
