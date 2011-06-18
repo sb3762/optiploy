@@ -373,5 +373,23 @@ public class Constants
      */
     public static final String REQUEST_TYPE_SHUTDOWN = "shutdown";
     
+    /**
+     * Modes
+     */
+    public static final String MODE = "mode";
+    public static final String MODE_ADD = "add";
+    public static final String MODE_UPDATE = "update";
+    public static final String MODE_DELETE = "delete";
+    public static final String MODE_PROFILE = "profile";
+    public static final String MODE_CANCEL = "cancel";
+    public static final String MODE_USER = "user";
+    public static final String MODE_ROLE = "role";
+    public static final String MODE_RELEASE = "release";
+    public static final String MODE_APPLICATION = "application";
+    public static final String MODE_ENVIRONMENT = "environment";
+    public static final String MODE_FUNCTION = "function";
+    public static final String MODE_MODULE = "module";
+    public static final String MODE_PROGRESS = "progress";
+    
     
 }

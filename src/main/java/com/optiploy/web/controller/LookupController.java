@@ -26,44 +26,44 @@ public class LookupController implements Controller
 		SecurityContext ctx = SecurityContextHolder.getContext();
 		User user = (User) ctx.getAuthentication().getPrincipal();
 		
-		if(request.getParameter("mode") != null)
+		if(request.getParameter(Constants.MODE) != null)
 		{	
-			 mode = request.getParameter("mode");
+			 mode = request.getParameter(Constants.MODE);
 		}
 		else
 		{
 			 return new ModelAndView("home", "home", "");
 		}
 		 
-		if(mode.equalsIgnoreCase("user"))
+		if(mode.equalsIgnoreCase(Constants.MODE_USER))
 		{
 			return new ModelAndView(Constants.USER_LIST, Constants.USER_LIST, lookupManager.getAllUsersList());
 		}
-		else if(mode.equalsIgnoreCase("role"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_ROLE))
 		{
 			return new ModelAndView(Constants.ROLE_LIST, Constants.ROLE_LIST, lookupManager.getAllRolesList());
 		}
-		else if(mode.equalsIgnoreCase("release"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_RELEASE))
 		{
 			return new ModelAndView(Constants.RELEASE_LIST, Constants.RELEASE_LIST, lookupManager.getAllReleasesList());
 		}
-		else if(mode.equalsIgnoreCase("application"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_APPLICATION))
 		{
 			return new ModelAndView(Constants.APPLICATION_LIST, Constants.APPLICATION_LIST, lookupManager.getAllApplicationList());
 		}
-		else if(mode.equalsIgnoreCase("environment"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_ENVIRONMENT))
 		{
 			return new ModelAndView(Constants.ENVIRONMENT_LIST, Constants.ENVIRONMENT_LIST, lookupManager.getAllEnvironmentList());
 		}
-		else if(mode.equalsIgnoreCase("function"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_FUNCTION))
 		{
 			return new ModelAndView(Constants.FUNCTION_LIST, Constants.FUNCTION_LIST, lookupManager.getAllFunctionList());
 		}
-		else if(mode.equalsIgnoreCase("module"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_MODULE))
 		{
 			return new ModelAndView(Constants.MODULE_LIST, Constants.MODULE_LIST, lookupManager.getAllModuleList());
 		}
-		else if(mode.equalsIgnoreCase("progress"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_PROGRESS))
 		{
 			return new ModelAndView(Constants.PROGRESS_LIST, Constants.PROGRESS_LIST, lookupManager.getAllProgressList());
 		}		
