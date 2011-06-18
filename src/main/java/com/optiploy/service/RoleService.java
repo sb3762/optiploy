@@ -13,6 +13,6 @@ public interface RoleService
     void update(Object object);
     void remove(Object object);
     
-    public Role getRoleByRoleName(String name);
+    public Role getRoleByName(String name);
 
 }

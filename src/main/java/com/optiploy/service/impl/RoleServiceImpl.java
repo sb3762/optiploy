@@ -40,9 +40,9 @@ public class RoleServiceImpl implements RoleService
         this.roleDao = roleDao;
     }
 	
-	public Role getRoleByRoleName(String name)
+	public Role getRoleByName(String name)
 	{
-		return roleDao.loadRoleByRoleName(name);
+		return roleDao.loadRoleByName(name);
 	}
 
 }
