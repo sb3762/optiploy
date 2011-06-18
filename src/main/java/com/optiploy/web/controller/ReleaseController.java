@@ -19,7 +19,7 @@ public class ReleaseController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(ReleaseController.class);
 	
-	private String method;	
+	private String mode;	
 	private ReleaseService releaseService;
 	private Locale locale;
 	
@@ -68,7 +68,7 @@ public class ReleaseController extends BaseFormController
 		else 
 		{
 		
-			if(method.equalsIgnoreCase("update"))
+			if(mode.equalsIgnoreCase("update"))
 			{	
 				releaseService.update(release);
 				
@@ -78,7 +78,7 @@ public class ReleaseController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{	
 				releaseService.insert(release);
 				
@@ -90,7 +90,7 @@ public class ReleaseController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}					
 			
 		}
@@ -104,16 +104,16 @@ public class ReleaseController extends BaseFormController
 	{
 		Release release = (Release) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}	
 					
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			release = new Release();						
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			release = (Release) releaseService.findById(Integer.parseInt(request.getParameter("id")));
 		}		

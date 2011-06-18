@@ -6,11 +6,46 @@
 
 <tiles-definitions>
 
-	<definition name="template" template="/WEB-INF/pages/template.jsp"/>		
+	<definition name="templateMain" template="/WEB-INF/pages/templateMain.jsp">	
+		<put-attribute name="title" value="Optiploy"/>
+		<put-attribute name="messages" value="/WEB-INF/pages/messages.jsp"/>				
+		<put-attribute name="content" value="/WEB-INF/pages/default.jsp"/>
+		<put-attribute name="navbar" value=""/>			
+	</definition>	
 		
-	<definition name="login" extends="template">	
+	<definition name="login" extends="templateMain">	
 		<put-attribute name="title" value="Welcome to Optiploy" />	
 		<put-attribute name="content" value="/WEB-INF/pages/login.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>
+	</definition>
+	
+	<definition name="passwordHint" extends="templateMain">	
+		<put-attribute name="title" value="Password Hint" />		
+		<put-attribute name="content" value="/WEB-INF/pages/passwordHint.jsp"/>			
+	</definition> 
+	
+	<definition name="home" extends="templateMain">	
+		<put-attribute name="title" value="Welcome to Optiploy" />	
+		<put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>	
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>
+	</definition> 
+	
+	<definition name="about" extends="templateMain">	
+		<put-attribute name="title" value="About Optiploy" />	
+		<put-attribute name="content" value="/WEB-INF/pages/about.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="user" extends="templateMain">	
+		<put-attribute name="title" value="User" />	
+		<put-attribute name="content" value="/WEB-INF/pages/user.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="userList" extends="templateMain">	
+		<put-attribute name="title" value="User List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/userList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
 </tiles-definitions>

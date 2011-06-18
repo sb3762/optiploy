@@ -19,7 +19,7 @@ public class EnvironmentController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(EnvironmentController.class);
 	
-	private String method;	
+	private String mode;	
 	private EnvironmentService environmentService;
 	private Locale locale;
 	
@@ -68,7 +68,7 @@ public class EnvironmentController extends BaseFormController
 		else 
 		{
 		
-			if(method.equalsIgnoreCase("update"))
+			if(mode.equalsIgnoreCase("update"))
 			{	
 				environmentService.update(environment);
 				
@@ -78,7 +78,7 @@ public class EnvironmentController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{	
 				environmentService.insert(environment);
 				
@@ -90,7 +90,7 @@ public class EnvironmentController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}					
 			
 		}
@@ -104,16 +104,16 @@ public class EnvironmentController extends BaseFormController
 	{
 		Environment environment = (Environment) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}	
 					
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			environment = new Environment();						
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			environment = (Environment) environmentService.findById(Integer.parseInt(request.getParameter("id")));
 		}		

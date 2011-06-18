@@ -19,7 +19,7 @@ public class ScriptController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(ScriptController.class);
 	
-	private String method;	
+	private String mode;	
 	private ScriptService scriptService;
 	private Locale locale;
 	
@@ -68,7 +68,7 @@ public class ScriptController extends BaseFormController
 		else 
 		{
 		
-			if(method.equalsIgnoreCase("update"))
+			if(mode.equalsIgnoreCase("update"))
 			{	
 				script.setVersion(script.getVersion() + 1);
 				
@@ -80,7 +80,7 @@ public class ScriptController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{	
 				script.setVersion(1);
 				
@@ -94,7 +94,7 @@ public class ScriptController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}					
 			
 		}
@@ -108,16 +108,16 @@ public class ScriptController extends BaseFormController
 	{
 		Script script = (Script) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}	
 					
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			script = new Script();						
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			script = (Script) scriptService.findById(Integer.parseInt(request.getParameter("id")));
 		}		

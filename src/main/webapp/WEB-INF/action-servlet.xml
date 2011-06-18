@@ -8,13 +8,14 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <value>
-                /*.html=viewController
+                /*.html=viewController 
                 /applicationController.do=applicationController
                 /buildController.do=buildController
                 /environmentController.do=environmentController
                 /functionController.do=functionController
                 /roleController.do=roleController
                 /releaseController.do=releaseController
+                /reloadController.do=reloadController
                 /lookupController.do=lookupController
                 /moduleController.do=moduleController
                 /progressController.do=progressController
@@ -93,6 +94,8 @@
         <property name="userService" ref="userService" /> 
         <property name="roleService" ref="roleService" />            
     </bean>
+    
+    <bean name="reloadController" class="com.optiploy.web.controller.ReloadController"/> 
     
     <bean name="roleController" class="com.optiploy.web.controller.RoleController" >
     	<property name="formView" value="role"/>

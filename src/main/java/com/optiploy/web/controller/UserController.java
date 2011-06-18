@@ -23,7 +23,7 @@ public class UserController extends BaseFormController
 {
 	private static Logger logger = Logger.getLogger(UserController.class);
 	
-	private String method;
+	private String mode;
 	private UserService userService;
 	private RoleService roleService;
 	private Locale locale;
@@ -70,7 +70,7 @@ public class UserController extends BaseFormController
 		}
 		else
 		{
-			if(method.equalsIgnoreCase("profile"))
+			if(mode.equalsIgnoreCase("profile"))
 			{			
 				userService.saveUser(user);	
 				
@@ -78,7 +78,7 @@ public class UserController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("update"))
+			else if(mode.equalsIgnoreCase("update"))
 			{
 				if (request.isUserInRole(Constants.ADMIN_ROLE)) 
 				{						
@@ -101,7 +101,7 @@ public class UserController extends BaseFormController
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(method.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase("add"))
 			{
 				try
 				{
@@ -134,34 +134,33 @@ public class UserController extends BaseFormController
 			}
 			else
 			{
-				logger.error("Method is null or not known value");
+				logger.error("Mode is null or not known value");
 			}
 			
 		}			
 				
 		return null;
 		
-	}
-	
+	}	
 		
 	protected Object formBackingObject(HttpServletRequest request)throws Exception
 	{
 		User user = (User) super.formBackingObject(request);
 		
-		if(request.getParameter("method") != null)
+		if(request.getParameter("mode") != null)
 		{	
-			method = request.getParameter("method");
+			mode = request.getParameter("mode");
 		}						
-		if(method.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase("add"))
 		{
 			user = new User();
 		}
-		else if(method.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase("update"))
 		{
 			user = (User) userService.findById(Integer.parseInt(request.getParameter("id")));
 			user.setConfirmPassword(user.getPassword());
 		}
-		else if(method.equalsIgnoreCase("profile"))
+		else if(mode.equalsIgnoreCase("profile"))
 		{
 			SecurityContext ctx = SecurityContextHolder.getContext();
 			Authentication auth = ctx.getAuthentication();
