@@ -92,7 +92,9 @@
         <property name="cancelView" value="home"/>
         <property name="validator" ref="beanValidator" />       
         <property name="userService" ref="userService" /> 
-        <property name="roleService" ref="roleService" />            
+        <property name="roleService" ref="roleService" />         
+        <property name="mailSender" ref="mailSender" /> 
+    	<property name="mailMessage" ref="mailMessage" />           
     </bean>
     
     <bean name="reloadController" class="com.optiploy.web.controller.ReloadController"/> 

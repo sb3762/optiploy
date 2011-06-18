@@ -48,4 +48,16 @@
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
+	<definition name="role" extends="templateMain">	
+		<put-attribute name="title" value="Role" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/role.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="roleList" extends="templateMain">	
+		<put-attribute name="title" value="Role List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/roleList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
 </tiles-definitions>
