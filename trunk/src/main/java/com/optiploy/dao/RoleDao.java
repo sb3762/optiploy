@@ -16,6 +16,6 @@ public interface RoleDao
     void remove(Object object);
     
     @Transactional
-    Role loadRoleByRoleName(String name);
+    Role loadRoleByName(String name);
 
 }

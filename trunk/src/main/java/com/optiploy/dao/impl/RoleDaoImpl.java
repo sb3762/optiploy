@@ -35,7 +35,7 @@ public class RoleDaoImpl extends HibernateDaoSupport implements RoleDao
 		getHibernateTemplate().update((Role)object);		
 	}
 	
-	public Role loadRoleByRoleName(String name) 
+	public Role loadRoleByName(String name) 
     {    	
 		List list = getHibernateTemplate().find("from Role where name=?", name);
 		return (Role) list.get(0);      
