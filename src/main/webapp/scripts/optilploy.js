@@ -46,7 +46,6 @@
     function toggle(id)
     {
     	node = document.getElementById( id+'_Node' );
-    	icon = document.getElementById( id+'_Icon' );
     	
     	if( node.style.display == 'none' )
     	{
