@@ -3,6 +3,7 @@ package com.optiploy.dao.impl;
 import java.util.List;
 
 import com.optiploy.dao.LookupDao;
+import com.optiploy.model.Agent;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
@@ -19,6 +20,16 @@ import com.optiploy.model.User;
  */
 public class LookupDaoImpl extends UniversalDaoImpl implements LookupDao 
 {
+	 /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Agent> getAgents() 
+    {
+        logger.debug("Retrieving all agent names...");
+
+        return getHibernateTemplate().find("from Agent order by name");
+    } 
 
     /**
      * {@inheritDoc}

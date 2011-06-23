@@ -132,4 +132,16 @@
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
+	<definition name="agent" extends="templateMain">	
+		<put-attribute name="title" value="Agent" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/agent.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="agentList" extends="templateMain">	
+		<put-attribute name="title" value="Agent List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/agentList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
 </tiles-definitions>

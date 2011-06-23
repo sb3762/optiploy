@@ -9,6 +9,7 @@
         <property name="mappings">
             <value>
                 /*.html=viewController 
+                /agentController.do=agentController
                 /applicationController.do=applicationController
                 /buildController.do=buildController
                 /environmentController.do=environmentController
@@ -59,6 +60,14 @@
     <bean id="viewController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>    
     
 <!-- Application Controllers -->
+
+	<bean name="agentController" class="com.optiploy.web.controller.AgentController" >
+    	<property name="formView" value="agent"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="agentService" ref="agentService" />       
+    </bean>
 
 	<bean name="applicationController" class="com.optiploy.web.controller.ApplicationController" >
     	<property name="formView" value="application"/>

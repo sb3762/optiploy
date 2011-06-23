@@ -2,6 +2,7 @@ package com.optiploy.manager;
 
 import java.util.List;
 
+import com.optiploy.model.Agent;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
@@ -45,6 +46,12 @@ public interface LookupManager extends UniversalManager
     List<LabelValue> getAllApplications();
     
     /**
+     * Retrieves all possible agents from persistence layer
+     * @return List of LabelValue objects
+     */
+    List<LabelValue> getAllAgents();
+    
+    /**
      * Retrieves all possible environments from persistence layer
      * @return List of LabelValue objects
      */
@@ -79,6 +86,12 @@ public interface LookupManager extends UniversalManager
      * @return List of User objects
      */
     List<User> getAllUsersList();
+    
+    /**
+     * Retrieves all possible jobs from persistence layer
+     * @return List of Agent objects
+     */
+    List<Agent> getAllAgentsList(); 
     
     /**
      * Retrieves all possible jobs from persistence layer
