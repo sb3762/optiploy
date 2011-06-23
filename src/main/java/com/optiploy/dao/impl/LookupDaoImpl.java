@@ -11,6 +11,7 @@ import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
 import com.optiploy.model.Role;
+import com.optiploy.model.Script;
 import com.optiploy.model.User;
 
 /**
@@ -105,6 +106,17 @@ public class LookupDaoImpl extends UniversalDaoImpl implements LookupDao
         logger.debug("Retrieving all progress names...");
 
         return getHibernateTemplate().find("from Progress order by name");
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Script> getScripts() 
+    {
+        logger.debug("Retrieving all script names...");
+
+        return getHibernateTemplate().find("from Script order by name");
     }
     
     /**

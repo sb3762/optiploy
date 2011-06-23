@@ -11,6 +11,7 @@ import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
 import com.optiploy.model.Role;
+import com.optiploy.model.Script;
 import com.optiploy.model.User;
 
 /**
@@ -66,6 +67,12 @@ public interface LookupManager extends UniversalManager
      * @return List of LabelValue objects
      */
     List<LabelValue> getAllModules();
+    
+    /**
+     * Retrieves all possible scripts from persistence layer
+     * @return List of LabelValue objects
+     */
+    List<LabelValue> getAllScripts();
         
     /**
      * Retrieves all possible users from persistence layer
@@ -92,19 +99,19 @@ public interface LookupManager extends UniversalManager
     List<Release> getAllReleasesList(); 
     
     /**
-     * Retrieves all possible application from persistence layer
+     * Retrieves all possible applications from persistence layer
      * @return List of Application objects
      */
     List<Application> getAllApplicationList();
     
     /**
-     * Retrieves all possible environment from persistence layer
+     * Retrieves all possible environments from persistence layer
      * @return List of Environment objects
      */
     List<Environment> getAllEnvironmentList();
     
     /**
-     * Retrieves all possible function from persistence layer
+     * Retrieves all possible functions from persistence layer
      * @return List of Function objects
      */
     List<Function> getAllFunctionList();
@@ -116,10 +123,16 @@ public interface LookupManager extends UniversalManager
     List<Progress> getAllProgressList();
     
     /**
-     * Retrieves all possible module from persistence layer
+     * Retrieves all possible modules from persistence layer
      * @return List of Module objects
      */
     List<Module> getAllModuleList();
+    
+    /**
+     * Retrieves all possible scripts from persistence layer
+     * @return List of Script objects
+     */
+    List<Script> getAllScriptList();
         
     
 }

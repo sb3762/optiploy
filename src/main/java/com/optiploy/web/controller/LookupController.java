@@ -70,7 +70,11 @@ public class LookupController implements Controller
 		else if(mode.equalsIgnoreCase(Constants.MODE_PROGRESS))
 		{
 			return new ModelAndView(Constants.PROGRESS_LIST, Constants.PROGRESS_LIST, lookupManager.getAllProgressList());
-		}		
+		}	
+		else if(mode.equalsIgnoreCase(Constants.MODE_SCRIPT))
+		{
+			return new ModelAndView(Constants.SCRIPT_LIST, Constants.SCRIPT_LIST, lookupManager.getAllScriptList());
+		}
 			
 			return new ModelAndView("home", "home", "");
 		 
