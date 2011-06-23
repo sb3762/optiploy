@@ -60,4 +60,64 @@
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
+	<definition name="environment" extends="templateMain">	
+		<put-attribute name="title" value="Environment" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/environment.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="environmentList" extends="templateMain">	
+		<put-attribute name="title" value="Environment List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/environmentList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="function" extends="templateMain">	
+		<put-attribute name="title" value="Function" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/function.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="functionList" extends="templateMain">	
+		<put-attribute name="title" value="Function List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/functionList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="release" extends="templateMain">	
+		<put-attribute name="title" value="Release" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/release.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="releaseList" extends="templateMain">	
+		<put-attribute name="title" value="Release List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/releaseList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="job" extends="templateMain">	
+		<put-attribute name="title" value="Job" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/job.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="jobList" extends="templateMain">	
+		<put-attribute name="title" value="Job List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/jobList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="buildSuccess" extends="templateMain">	
+		<put-attribute name="title" value="Build Success" />	
+		<put-attribute name="content" value="/WEB-INF/pages/buildSuccess.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="buildFailure" extends="templateMain">	
+		<put-attribute name="title" value="Build Failure" />	
+		<put-attribute name="content" value="/WEB-INF/pages/buildFailure.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
 </tiles-definitions>

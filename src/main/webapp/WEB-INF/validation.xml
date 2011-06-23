@@ -48,6 +48,16 @@
       </form>
   </formset>
   <formset>
+   		<form name="job">   			               
+              <field property="name" depends="required">
+                  <arg0 key="jobForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="jobForm.description"/>
+              </field>                         
+      </form>
+  </formset>
+  <formset>
    		<form name="role">   			               
               <field property="name" depends="required">
                   <arg0 key="roleForm.name"/>
