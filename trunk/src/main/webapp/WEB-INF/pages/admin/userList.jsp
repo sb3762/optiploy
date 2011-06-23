@@ -1,11 +1,11 @@
 <%@ include file="../taglibs.jsp"%>
 
 <c:set var="buttons">
-    <input type="button" style="margin-right: 5px"
+    <input type="button" class="button"
         onclick="location.href='<c:url value="/userController.do?mode=add"/>'"
         value="<fmt:message key="button.add"/>"/>
 
-    <input type="button" onclick="location.href='<c:url value="/home.html"/>'"
+    <input type="button" class="button" onclick="location.href='<c:url value="/home.html"/>'"
         value="<fmt:message key="button.done"/>"/>
 </c:set>
 
