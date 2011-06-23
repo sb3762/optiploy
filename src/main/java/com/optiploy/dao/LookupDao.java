@@ -2,6 +2,7 @@ package com.optiploy.dao;
 
 import java.util.List;
 
+import com.optiploy.model.Agent;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
@@ -19,6 +20,12 @@ import com.optiploy.model.User;
  */
 public interface LookupDao extends UniversalDao 
 {
+	/**
+     * Returns all Agents ordered by name
+     * @return populated list of jobs
+     */
+    List<Agent> getAgents();    
+    
     /**
      * Returns all Jobs ordered by name
      * @return populated list of jobs

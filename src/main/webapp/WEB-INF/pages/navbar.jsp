@@ -19,6 +19,12 @@
 		</div>
 	</li>
 	
+	<li><a href="javascript:toggle('Agent')">Agent Actions</a>
+		<div id='Agent_Node' style=display?block:none>
+			<a href="/lookupController.do?mode=agent">Agent List</a><br>			
+		</div>
+	</li>
+	
 	<li><a href="javascript:toggle('Job')">Job Actions</a>
 		<div id='Job_Node' style=display?block:none>
 			<a href="/lookupController.do?mode=job">Job List</a><br>

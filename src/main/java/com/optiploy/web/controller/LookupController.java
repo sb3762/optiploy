@@ -39,6 +39,10 @@ public class LookupController implements Controller
 		{
 			return new ModelAndView(Constants.USER_LIST, Constants.USER_LIST, lookupManager.getAllUsersList());
 		}
+		if(mode.equalsIgnoreCase(Constants.MODE_AGENT))
+		{
+			return new ModelAndView(Constants.AGENT_LIST, Constants.AGENT_LIST, lookupManager.getAllAgentsList());
+		}
 		else if(mode.equalsIgnoreCase(Constants.MODE_ROLE))
 		{
 			return new ModelAndView(Constants.ROLE_LIST, Constants.ROLE_LIST, lookupManager.getAllRolesList());

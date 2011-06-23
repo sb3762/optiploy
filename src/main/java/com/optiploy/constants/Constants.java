@@ -34,6 +34,11 @@ public class Constants
      * The request scope attribute under which an editable user form is stored
      */
     public static final String USER_KEY = "userForm";
+    
+    /**
+     * The request scope attribute that holds the agent list
+     */
+    public static final String AGENT_LIST = "agentList";
 
     /**
      * The request scope attribute that holds the user list
@@ -383,6 +388,7 @@ public class Constants
      */
     public static final String MODE = "mode";
     public static final String MODE_ADD = "add";
+    public static final String MODE_AGENT = "agent";
     public static final String MODE_UPDATE = "update";
     public static final String MODE_DETAIL = "detail";
     public static final String MODE_DELETE = "delete";

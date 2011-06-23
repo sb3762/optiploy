@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.optiploy.dao.LookupDao;
 import com.optiploy.manager.LookupManager;
+import com.optiploy.model.Agent;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
@@ -38,6 +39,22 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
     {
         super.dao = dao;
         this.dao = dao;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public List<LabelValue> getAllAgents() 
+    {
+        List<Agent> agents = dao.getAgents();
+        List<LabelValue> list = new ArrayList<LabelValue>();
+
+        for (Agent agent1 : agents) 
+        {
+            list.add(new LabelValue(agent1.getName(), agent1.getName()));
+        }
+
+        return list;
     }
 
     /**
@@ -191,6 +208,14 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
 	public List<User> getAllUsersList()
 	{       
         return dao.getUsers();
+	}
+	
+	/**
+     * {@inheritDoc}
+     */
+	public List<Agent> getAllAgentsList()
+	{
+		return dao.getAgents();
 	}
 	
 	/**
