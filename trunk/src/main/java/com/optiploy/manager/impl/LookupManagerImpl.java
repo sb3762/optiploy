@@ -16,6 +16,7 @@ import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
 import com.optiploy.model.Role;
+import com.optiploy.model.Script;
 import com.optiploy.model.User;
 
 
@@ -166,6 +167,22 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
 
         return list;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public List<LabelValue> getAllScripts() 
+    {
+        List<Script> scripts = dao.getScripts();
+        List<LabelValue> list = new ArrayList<LabelValue>();
+
+        for (Script script1 : scripts) 
+        {
+            list.add(new LabelValue(script1.getName(), script1.getName()));
+        }
+
+        return list;
+    }
         
         
    /**
@@ -238,6 +255,14 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
 	public List<Progress> getAllProgressList()
 	{
 		return dao.getProgresses();
+	}
+	
+	/**
+     * {@inheritDoc}
+     */
+	public List<Script> getAllScriptList()
+	{
+		return dao.getScripts();
 	}
 	
 		

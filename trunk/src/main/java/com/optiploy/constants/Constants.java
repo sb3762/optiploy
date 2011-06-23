@@ -81,9 +81,9 @@ public class Constants
     public static final String MODULE_LIST = "moduleList";
         
     /**
-     * The request scope attribute that holds the drool list
+     * The request scope attribute that holds the script list
      */
-    public static final String DROOL_LIST = "droolList";
+    public static final String SCRIPT_LIST = "scriptList";
    
     /**
      * The request scope attribute for indicating a newly-registered user
@@ -125,10 +125,10 @@ public class Constants
     public static final String AVAILABLE_APPLICATIONS = "availableApplications";
           
     /**
-     * The name of the available drool list, a request-scoped attribute
-     * when adding/editing a drool.
+     * The name of the available script list, a request-scoped attribute
+     * when adding/editing a script.
      */
-    public static final String AVAILABLE_DROOLS = "availableDrools";
+    public static final String AVAILABLE_SCRIPTS = "availableScripts";
     
     /**
      * The name of the available function list, a request-scoped attribute
@@ -397,6 +397,7 @@ public class Constants
     public static final String MODE_FUNCTION = "function";
     public static final String MODE_MODULE = "module";
     public static final String MODE_PROGRESS = "progress";
+    public static final String MODE_SCRIPT = "script";
     
     
 }

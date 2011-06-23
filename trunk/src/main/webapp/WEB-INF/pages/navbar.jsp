@@ -26,6 +26,13 @@
 		</div>
 	</li>
 	
+	<li><a href="javascript:toggle('Script')">Script Actions</a>
+		<div id='Script_Node' style=display?block:none>
+			<a href="/lookupController.do?mode=script">Script List</a><br>
+			<a href="/jobController.do?mode=add">Script Job</a>			
+		</div>
+	</li>
+	
 	<li><a href="javascript:toggle('Role')">Role Actions</a>
 		<div id='Role_Node' style=display?block:none>
 			<a href="/lookupController.do?mode=role">Role List</a><br>

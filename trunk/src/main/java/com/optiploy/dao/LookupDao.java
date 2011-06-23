@@ -10,6 +10,7 @@ import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
 import com.optiploy.model.Role;
+import com.optiploy.model.Script;
 import com.optiploy.model.User;
 
 /**
@@ -65,6 +66,12 @@ public interface LookupDao extends UniversalDao
      * @return populated list of progesses
      */
     List<Progress> getProgresses();
+    
+    /**
+     * Returns all Scripts ordered by name
+     * @return populated list of scripts
+     */
+    List<Script> getScripts();
             
     /**
      * Returns all Users ordered by name

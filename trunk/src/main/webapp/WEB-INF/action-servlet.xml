@@ -20,6 +20,7 @@
                 /lookupController.do=lookupController
                 /moduleController.do=moduleController
                 /progressController.do=progressController
+                /scriptController.do=scriptController
                 /userController.do=userController
                 /passwordHintController.do=passwordHintController
             </value>
@@ -116,6 +117,14 @@
         <property name="validator" ref="beanValidator" />        
         <property name="releaseService" ref="releaseService" />       
     </bean>
+    
+    <bean name="scriptController" class="com.optiploy.web.controller.ScriptController" >
+    	<property name="formView" value="script"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />        
+        <property name="scriptService" ref="scriptService" />       
+    </bean> 
     
     <bean name="moduleController" class="com.optiploy.web.controller.ModuleController" >
     	<property name="formView" value="module"/>

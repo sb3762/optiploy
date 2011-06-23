@@ -120,4 +120,16 @@
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
+	<definition name="script" extends="templateMain">	
+		<put-attribute name="title" value="Script" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/script.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
+	<definition name="scriptList" extends="templateMain">	
+		<put-attribute name="title" value="Script List" />	
+		<put-attribute name="content" value="/WEB-INF/pages/admin/scriptList.jsp"/>
+		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
+	</definition>
+	
 </tiles-definitions>

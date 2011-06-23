@@ -130,4 +130,14 @@
               </field>                       
       </form>
   </formset>
+   <formset>
+   		<form name="script">   			               
+              <field property="name" depends="required">
+                  <arg0 key="scriptForm.name"/>
+              </field>
+              <field property="description" depends="required">
+                  <arg0 key="scriptForm.description"/>
+              </field>                       
+      </form>
+  </formset>
 </form-validation>
