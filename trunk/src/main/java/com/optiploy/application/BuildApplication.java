@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -120,6 +119,8 @@ public class BuildApplication
 	                	
 	                	try
 						{ 
+	                		buildMonitor = new BuildMonitor();
+	                		
 	                		buildMonitor.setLog(log);
 		                	buildMonitor.setInterval(buildMonitorInterval);
 		                	buildMonitor.start(); 
@@ -137,6 +138,18 @@ public class BuildApplication
 	                		
 							return false;
 						}
+	                	catch(IllegalThreadStateException e)
+	                	{
+	                		log.setBuildMessage("SERVER: Agent ID "
+									+ instances.get(i).getAgentId()
+									+ " IllegalThreadStateException");
+	                		
+	                		logService.update(log);
+	                		
+	                		logger.error("IllegalThreadStateException: " + e);
+	                		
+	                		return false;
+	                	}
 	                		 
 	                		return true;
 	                }	

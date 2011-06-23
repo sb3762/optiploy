@@ -5,6 +5,7 @@ import java.util.List;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
+import com.optiploy.model.Job;
 import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
@@ -17,6 +18,12 @@ import com.optiploy.model.User;
  */
 public interface LookupDao extends UniversalDao 
 {
+    /**
+     * Returns all Jobs ordered by name
+     * @return populated list of jobs
+     */
+    List<Job> getJobs();
+    
     /**
      * Returns all Roles ordered by name
      * @return populated list of roles

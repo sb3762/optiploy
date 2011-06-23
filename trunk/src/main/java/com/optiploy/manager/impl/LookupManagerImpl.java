@@ -10,6 +10,7 @@ import com.optiploy.manager.LookupManager;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
+import com.optiploy.model.Job;
 import com.optiploy.model.LabelValue;
 import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
@@ -38,6 +39,22 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
         this.dao = dao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public List<LabelValue> getAllJobs() 
+    {
+        List<Job> jobs = dao.getJobs();
+        List<LabelValue> list = new ArrayList<LabelValue>();
+
+        for (Job job1 : jobs) 
+        {
+            list.add(new LabelValue(job1.getName(), job1.getName()));
+        }
+
+        return list;
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -157,6 +174,14 @@ public class LookupManagerImpl extends UniversalManagerImpl implements LookupMan
 	public List<User> getAllUsersList()
 	{       
         return dao.getUsers();
+	}
+	
+	/**
+     * {@inheritDoc}
+     */
+	public List<Job> getAllJobsList()
+	{
+		return dao.getJobs();
 	}
 	
 	/**
