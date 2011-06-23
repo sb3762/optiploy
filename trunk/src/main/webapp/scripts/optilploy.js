@@ -45,9 +45,9 @@
 
     function toggle(id)
     {
-    	node = document.getElementById( id+'_Node' );
+    	node = document.getElementById(id + '_Node');
     	
-    	if( node.style.display == 'none' )
+    	if(node.style.display == 'none')
     	{
     		node.style.display = 'block';
     	}

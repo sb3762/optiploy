@@ -13,6 +13,7 @@
                 /buildController.do=buildController
                 /environmentController.do=environmentController
                 /functionController.do=functionController
+                /jobController.do=jobController
                 /roleController.do=roleController
                 /releaseController.do=releaseController
                 /reloadController.do=reloadController
@@ -84,19 +85,20 @@
         <property name="cancelView" value="home"/>
         <property name="validator" ref="beanValidator" />        
         <property name="functionService" ref="functionService" />       
-    </bean>
-
- 	<bean name="userController" class="com.optiploy.web.controller.UserController" >
-    	<property name="formView" value="user"/>
+    </bean>  
+    
+    <bean name="jobController" class="com.optiploy.web.controller.JobController" >
+    	<property name="formView" value="job"/>
         <property name="successView" value="home"/>
         <property name="cancelView" value="home"/>
-        <property name="validator" ref="beanValidator" />       
-        <property name="userService" ref="userService" /> 
-        <property name="roleService" ref="roleService" />         
-        <property name="mailSender" ref="mailSender" /> 
-    	<property name="mailMessage" ref="mailMessage" />           
-    </bean>
+        <property name="validator" ref="beanValidator" />        
+        <property name="jobService" ref="jobService" />       
+    </bean>  
     
+    <bean name="lookupController" class="com.optiploy.web.controller.LookupController">    	
+    	<property name="lookupManager" ref="lookupManager" />
+    </bean>
+ 	
     <bean name="reloadController" class="com.optiploy.web.controller.ReloadController"/> 
     
     <bean name="roleController" class="com.optiploy.web.controller.RoleController" >
@@ -137,8 +139,16 @@
     	<property name="userService" ref="userService" />    	
     </bean> 
     
-    <bean name="lookupController" class="com.optiploy.web.controller.LookupController">    	
-    	<property name="lookupManager" ref="lookupManager" />
+    <bean name="userController" class="com.optiploy.web.controller.UserController" >
+    	<property name="formView" value="user"/>
+        <property name="successView" value="home"/>
+        <property name="cancelView" value="home"/>
+        <property name="validator" ref="beanValidator" />       
+        <property name="userService" ref="userService" /> 
+        <property name="roleService" ref="roleService" />         
+        <property name="mailSender" ref="mailSender" /> 
+    	<property name="mailMessage" ref="mailMessage" />           
     </bean>
+    
 
 </beans>
