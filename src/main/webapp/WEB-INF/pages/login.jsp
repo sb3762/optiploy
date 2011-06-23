@@ -13,8 +13,8 @@
 			
 				<h3><input type="checkbox" name="_spring_security_remember_me" tabindex="3"/> <fmt:message key="login.rememberMe"/></h3>
 			
-				<h1><input name="login" type="submit" value="<fmt:message key='button.login'/>" tabindex="4"/></h1>
-				
+				<input name="login" class="button" type="submit" value="<fmt:message key='button.login'/>" tabindex="4"/>
+								
 				<br>
 				
 				<h3><a href="/passwordHint.html"><fmt:message key="login.passwordHint"/></a></h3>
