@@ -5,6 +5,7 @@ import java.util.List;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
+import com.optiploy.model.Job;
 import com.optiploy.model.LabelValue;
 import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
@@ -19,10 +20,16 @@ import com.optiploy.model.User;
 public interface LookupManager extends UniversalManager 
 {
     /**
+     * Retrieves all possible jobs from persistence layer
+     * @return List of LabelValue objects
+     */
+    List<LabelValue> getAllJobs(); 
+    
+    /**
      * Retrieves all possible roles from persistence layer
      * @return List of LabelValue objects
      */
-    List<LabelValue> getAllRoles();   
+    List<LabelValue> getAllRoles();
     
     /**
      * Retrieves all possible releases from persistence layer
@@ -65,6 +72,12 @@ public interface LookupManager extends UniversalManager
      * @return List of User objects
      */
     List<User> getAllUsersList();
+    
+    /**
+     * Retrieves all possible jobs from persistence layer
+     * @return List of Job objects
+     */
+    List<Job> getAllJobsList(); 
     
     /**
      * Retrieves all possible roles from persistence layer

@@ -6,6 +6,7 @@ import com.optiploy.dao.LookupDao;
 import com.optiploy.model.Application;
 import com.optiploy.model.Environment;
 import com.optiploy.model.Function;
+import com.optiploy.model.Job;
 import com.optiploy.model.Module;
 import com.optiploy.model.Progress;
 import com.optiploy.model.Release;
@@ -22,12 +23,23 @@ public class LookupDaoImpl extends UniversalDaoImpl implements LookupDao
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    public List<Job> getJobs() 
+    {
+        logger.debug("Retrieving all job names...");
+
+        return getHibernateTemplate().find("from Job order by name");
+    }  
+    
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
     public List<Role> getRoles() 
     {
         logger.debug("Retrieving all role names...");
 
         return getHibernateTemplate().find("from Role order by name");
-    }  
+    } 
     
     /**
      * {@inheritDoc}

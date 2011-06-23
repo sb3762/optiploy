@@ -41,6 +41,11 @@ public class Constants
     public static final String USER_LIST = "userList";
     
     /**
+     * The request scope attribute that holds the job list
+     */
+    public static final String JOB_LIST = "jobList";
+    
+    /**
      * The request scope attribute that holds the role list
      */
     public static final String ROLE_LIST = "roleList";
@@ -379,11 +384,13 @@ public class Constants
     public static final String MODE = "mode";
     public static final String MODE_ADD = "add";
     public static final String MODE_UPDATE = "update";
+    public static final String MODE_DETAIL = "detail";
     public static final String MODE_DELETE = "delete";
     public static final String MODE_PROFILE = "profile";
     public static final String MODE_CANCEL = "cancel";
     public static final String MODE_USER = "user";
     public static final String MODE_ROLE = "role";
+    public static final String MODE_JOB = "job";
     public static final String MODE_RELEASE = "release";
     public static final String MODE_APPLICATION = "application";
     public static final String MODE_ENVIRONMENT = "environment";

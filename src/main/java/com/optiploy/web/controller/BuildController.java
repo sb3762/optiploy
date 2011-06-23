@@ -3,7 +3,6 @@ package com.optiploy.web.controller;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,18 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import com.optiploy.application.BuildApplication;
-import com.optiploy.constants.Constants;
 import com.optiploy.exception.DataNotFoundException;
 import com.optiploy.exception.OptiployException;
-import com.optiploy.model.Agent;
-import com.optiploy.model.Property;
-import com.optiploy.model.Role;
-import com.optiploy.model.User;
-import com.optiploy.service.AgentService;
-import com.optiploy.service.LogService;
-import com.optiploy.service.PropertyService;
-import com.optiploy.service.RoleService;
-import com.optiploy.service.UserService;
 import com.optiploy.web.listener.StartupListener;
 
 
@@ -50,6 +39,8 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 		StartupListener.setupContext(request.getSession().getServletContext());	
 		
 		locale = request.getLocale();
+		
+		boolean buildSuccess = false;
 				
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		
@@ -71,20 +62,23 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 						
 			try
 			{
-				boolean buildSuccess = buildApplication.startBuild(jobId, parameterMap);
+				buildSuccess = buildApplication.startBuild(jobId, parameterMap);
 			} 
 			catch (DataNotFoundException e)
 			{
-				e.printStackTrace();
+				logger.error("DataNotFoundException: " + e);
 			} 
 			catch (OptiployException e)
 			{
-				e.printStackTrace();
+				logger.error("OptiployException: " + e);
 			}
 			
 		}		
 		
-		return new ModelAndView("login","login",null);
+		if(buildSuccess)		
+			return new ModelAndView("buildSuccess","buildSuccess",null);				
+		else
+			return new ModelAndView("buildFailure","buildFailure",null);
 				
 	}	
 		
