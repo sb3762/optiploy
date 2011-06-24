@@ -10,7 +10,9 @@ Run application: Run mvn jetty:run-war with POM property set to <dbunit.skip>tru
 
 Run agent: java -jar Optiploy-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
-Run job: http://localhost:8080/buildController.do?jobId=1&Test=Hi 
-
 Log in: http://localhost:8080/login.html
+
+Username: admin | Password: admin
+
+Still have to work on the job page but to do a sample build, go to Job Actions/Job List/Pick job and click small build icon.  Going to flesh this out over the next week.  My kids permitting...
 
