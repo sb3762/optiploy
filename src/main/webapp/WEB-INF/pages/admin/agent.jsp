@@ -33,7 +33,32 @@
 					<fmt:message key="agentForm.description"/> 
 					<form:errors path="description" cssClass="fieldError"/>
 					<form:input path="description" id="description" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>			
+			</li>	
+			<li>				
+					<fmt:message key="agentForm.status"/> 
+					<form:errors path="status" cssClass="fieldError"/>
+					<form:input disabled="true" path="status" id="status" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
+			</li>	
+			<li>				
+					<fmt:message key="agentForm.priority"/> 
+					<form:errors path="priority" cssClass="fieldError"/>
+					<form:input disabled="true" path="priority" id="priority" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
+			</li>	
+			<li>				
+					<fmt:message key="agentForm.address"/> 
+					<form:errors path="address" cssClass="fieldError"/>
+					<form:input disabled="true" path="address" id="address" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
+			</li>	
+			<li>				
+					<fmt:message key="agentForm.port"/> 
+					<form:errors path="port" cssClass="fieldError"/>
+					<form:input disabled="true" path="port" id="port" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
+			</li>
+			<li>				
+					<fmt:message key="agentForm.version"/> 
+					<form:errors path="version" cssClass="fieldError"/>
+					<form:input disabled="true" path="version" id="version" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
+			</li>
 		</ul>						
 				<c:out value="${buttons}" escapeXml="false"/>
 				<br><br>
