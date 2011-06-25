@@ -1,5 +1,6 @@
 @import url(displaytag.css);
 @import url(forms.css);
+@import url(messages.css);
 
 * {
     padding: 0;
@@ -113,6 +114,14 @@ a:hover
 	margin-bottom: 10px; 
 	margin-top: 10px;
 }
+
+.middle TH
+{
+	color: #3B6EBF;
+	font-size: 12px; 
+	margin-bottom: 10px; 
+	margin-top: 10px;
+}		
 
 #clear 
 {
