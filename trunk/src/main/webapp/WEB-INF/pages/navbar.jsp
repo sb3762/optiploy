@@ -35,7 +35,7 @@
 	<li><a href="javascript:toggle('Script')">Script Actions</a>
 		<div id='Script_Node' style=display?block:none>
 			<a href="/lookupController.do?mode=script">Script List</a><br>
-			<a href="/jobController.do?mode=add">Script Job</a>			
+			<a href="/scriptController.do?mode=add">Add Script</a>			
 		</div>
 	</li>
 	
