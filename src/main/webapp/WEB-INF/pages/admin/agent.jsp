@@ -20,49 +20,49 @@
 			<input type="hidden" name="mode" value="${param.mode}"/>			
         </c:if>
 
-		<ul>
-			<li>
-		            <fmt:message key="agentForm.admin.message"/>		    
-		    </li>			
-			<li>				
-					<fmt:message key="agentForm.name"/> 
-					<form:errors path="name" cssClass="fieldError"/>
-					<form:input path="name" id="name" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>
-			<li>				
-					<fmt:message key="agentForm.description"/> 
-					<form:errors path="description" cssClass="fieldError"/>
-					<form:input path="description" id="description" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>	
-			<li>				
-					<fmt:message key="agentForm.status"/> 
-					<form:errors path="status" cssClass="fieldError"/>
-					<form:input disabled="true" path="status" id="status" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>	
-			<li>				
-					<fmt:message key="agentForm.priority"/> 
-					<form:errors path="priority" cssClass="fieldError"/>
-					<form:input disabled="true" path="priority" id="priority" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>	
-			<li>				
-					<fmt:message key="agentForm.address"/> 
-					<form:errors path="address" cssClass="fieldError"/>
-					<form:input disabled="true" path="address" id="address" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>	
-			<li>				
-					<fmt:message key="agentForm.port"/> 
-					<form:errors path="port" cssClass="fieldError"/>
-					<form:input disabled="true" path="port" id="port" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>
-			<li>				
-					<fmt:message key="agentForm.version"/> 
-					<form:errors path="version" cssClass="fieldError"/>
-					<form:input disabled="true" path="version" id="version" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>
-		</ul>						
-				<c:out value="${buttons}" escapeXml="false"/>
-				<br><br>
-
+		<c:if test="${param.mode == 'update' or param.mode == 'add'}">				
+		<center>
+			<fmt:message key="jobForm.admin.message"/>
+			<br>
+			<table class="table">
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.name"/></th>
+	   				<td align="left"><form:errors path="name" cssClass="fieldError"/><form:input path="name" id="name"/></td>
+	   			</tr>
+	   			<tr>	
+	   				<th align="left"><fmt:message key="agentForm.description"/></th> 
+					<th align="left"><form:errors path="description" cssClass="fieldError"/><form:input path="description" id="description" cssClass="fieldError"/></th>
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.status"/></th>  
+					<th align="left"><form:errors path="status" cssClass="fieldError"/><form:input disabled="true" path="status" id="status" cssClass="fieldError" /></th> 
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.priority"/></th>  
+					<th align="left"><form:errors path="priority" cssClass="fieldError"/><form:input disabled="true" path="priority" id="priority" cssClass="fieldError" /></th> 
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.address"/></th>  
+					<th align="left"><form:errors path="address" cssClass="fieldError"/><form:input disabled="true" path="address" id="address" cssClass="fieldError" /></th> 
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.port"/></th>  
+					<th align="left"><form:errors path="port" cssClass="fieldError"/><form:input disabled="true" path="port" id="port" cssClass="fieldError" /></th> 
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="agentForm.version"/></th>  
+					<th align="left"><form:errors path="version" cssClass="fieldError"/><form:input disabled="true" path="version" id="version" cssClass="fieldError" /></th> 
+	   			</tr>	   			
+	   		</table>
+	   		
+  			<br><br>
+  									
+			<c:out value="${buttons}" escapeXml="false"/>
+			
+			<br><br>			
+		</center>		
+		</c:if>
+		
 		</form:form>
 
 		

@@ -108,15 +108,9 @@
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
-	<definition name="buildSuccess" extends="templateMain">	
-		<put-attribute name="title" value="Build Success" />	
-		<put-attribute name="content" value="/WEB-INF/pages/buildSuccess.jsp"/>
-		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
-	</definition>
-	
-	<definition name="buildFailure" extends="templateMain">	
-		<put-attribute name="title" value="Build Failure" />	
-		<put-attribute name="content" value="/WEB-INF/pages/buildFailure.jsp"/>
+	<definition name="buildComplete" extends="templateMain">	
+		<put-attribute name="title" value="Build Complete" />	
+		<put-attribute name="content" value="/WEB-INF/pages/buildComplete.jsp"/>
 		<put-attribute name="navbar" value="/WEB-INF/pages/navbar.jsp"/>	
 	</definition>
 	
