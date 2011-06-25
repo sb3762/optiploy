@@ -1,7 +1,9 @@
 package com.optiploy.web.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import com.optiploy.application.BuildApplication;
 import com.optiploy.exception.DataNotFoundException;
 import com.optiploy.exception.OptiployException;
+import com.optiploy.model.Log;
+import com.optiploy.model.Role;
 import com.optiploy.web.listener.StartupListener;
 
 
@@ -40,7 +44,7 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 		
 		locale = request.getLocale();
 		
-		boolean buildSuccess = false;
+		Log returnedLog = new Log();
 				
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		
@@ -62,7 +66,7 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 						
 			try
 			{
-				buildSuccess = buildApplication.startBuild(jobId, parameterMap);
+				returnedLog = buildApplication.startBuild(jobId, parameterMap);
 			} 
 			catch (DataNotFoundException e)
 			{
@@ -74,11 +78,8 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 			}
 			
 		}		
+			return new ModelAndView("buildComplete","buildComplete",null);				
 		
-		if(buildSuccess)		
-			return new ModelAndView("buildSuccess","buildSuccess",null);				
-		else
-			return new ModelAndView("buildFailure","buildFailure",null);
 				
 	}	
 		
