@@ -41,11 +41,13 @@ public class BuildApplication
 		
 	}	
 	
-	public boolean startBuild(int jobId, HashMap<String, String> parameterMap) throws DataNotFoundException, OptiployException
+	public Log startBuild(int jobId, HashMap<String, String> parameterMap) throws DataNotFoundException, OptiployException
     {	
 		logger.debug("Starting Build | Job ID: " + jobId);
 		
 		Log log = new Log();
+		
+		Log returnLog = new Log();
 		
 		boolean buildStarted = false;
 			
@@ -113,7 +115,7 @@ public class BuildApplication
 	                            + version
 	                            + ") successfully started build.");
 	                	
-	                	logService.update(log);
+	                	returnLog = logService.merge(log);
 	                	              
 	                	buildStarted = true;	                	
 	                	
@@ -132,11 +134,11 @@ public class BuildApplication
 									+ instances.get(i).getAgentId()
 									+ " build was interrupted");
 	                		
-	                		logService.update(log);
+	                		returnLog = logService.merge(log);
 	                		
 	                		logger.error("BuildApplication Interrupted: " + e);
 	                		
-							return false;
+							return returnLog;
 						}
 	                	catch(IllegalThreadStateException e)
 	                	{
@@ -144,14 +146,14 @@ public class BuildApplication
 									+ instances.get(i).getAgentId()
 									+ " IllegalThreadStateException");
 	                		
-	                		logService.update(log);
+	                		returnLog = logService.merge(log);
 	                		
 	                		logger.error("IllegalThreadStateException: " + e);
 	                		
-	                		return false;
+	                		return returnLog;
 	                	}
 	                		 
-	                		return true;
+	                		return returnLog;
 	                }	
 	                else
 	                {
@@ -162,14 +164,14 @@ public class BuildApplication
 								+ " could not start due to reason: "
 								+ reason);
 						
-						logService.update(log);
+						returnLog = logService.merge(log);
 						
 	                	if(((Boolean) response.getParameter(Constants.AGENT_STATUS_LOWDISK)).booleanValue())
 	                	{	
 	                		agent.setStatus(Constants.AGENT_STATUS_LOWDISK);
 	                		log.setBuildMessage("The following agent has lowdisk: " + agent.getName());	  
 	                		
-	                		logService.update(log);
+	                		returnLog = logService.merge(log);
 	                	}	                	        
 	                }
 	            }	
@@ -182,7 +184,7 @@ public class BuildApplication
 	            	agent.setStatus(Constants.AGENT_STATUS_INCOMPATIBLE);
 	            	log.setBuildMessage("The following agent is incompatible: " + agent.getName());	  
 	            	
-	            	logService.update(log);
+	            	returnLog = logService.merge(log);
 	            }
 	        }	
 	        catch (IOException e)
@@ -194,7 +196,7 @@ public class BuildApplication
 	        	agent.setStatus(Constants.AGENT_STATUS_DOWN);
 	        	log.setBuildMessage("The following agent is down: " + agent.getName());	
 	        	
-	        	logService.insert(log);
+	        	returnLog = logService.merge(log);
 	        }	
 	        catch (ClassNotFoundException e)
 	        {
@@ -205,7 +207,7 @@ public class BuildApplication
 	        	agent.setStatus(Constants.AGENT_STATUS_INCOMPATIBLE);
 	        	log.setBuildMessage("The following agent is incompatible: " + agent.getName());
 	        	
-	        	logService.insert(log);
+	        	returnLog = logService.merge(log);
 	        }	
 	        finally
 	        {
@@ -244,10 +246,10 @@ public class BuildApplication
 	                + "SERVER: Canceling build, "
 	                + message);
 	        
-	        logService.insert(log);
+	        returnLog = logService.merge(log);
 	    }
 	    
-	    return false;		
+	    return returnLog;		
     }	
 	
 	@Required
