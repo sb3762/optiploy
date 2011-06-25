@@ -20,23 +20,28 @@
 			<input type="hidden" name="mode" value="${param.mode}"/>			
         </c:if>
 
-		<ul>
-			<li>
-		            <fmt:message key="environmentForm.admin.message"/>		    
-		    </li>			
-			<li>				
-					<fmt:message key="environmentForm.name"/> 
-					<form:errors path="name" cssClass="fieldError"/>
-					<form:input path="name" id="name" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>
-			<li>				
-					<fmt:message key="environmentForm.description"/> 
-					<form:errors path="description" cssClass="fieldError"/>
-					<form:input path="description" id="description" cssClass="bodytext" cssErrorClass="bodytext error" maxlength="50" />
-			</li>			
-		</ul>						
-				<c:out value="${buttons}" escapeXml="false"/>
-				<br><br>
+		<c:if test="${param.mode == 'update' or param.mode == 'add'}">
+		<center>
+			<fmt:message key="environmentForm.admin.message"/>
+			<br>
+			<table class="table">
+	   			<tr>
+	   				<th align="left"><fmt:message key="environmentForm.name"/></th>
+	   				<td align="left"><form:errors path="name" cssClass="fieldError"/><form:input path="name" id="name"/></td>
+	   			</tr>
+	   			<tr>
+	   				<th align="left"><fmt:message key="environmentForm.description"/></th>
+	   				<td align="left"><form:errors path="description" cssClass="fieldError"/><form:input path="description" id="description" cssClass="fieldError" /></td>
+	   			</tr>
+	   		</table>
+	   		
+  			<br><br>
+  									
+			<c:out value="${buttons}" escapeXml="false"/>
+			
+			<br><br>			
+		</center>			
+	   	</c:if>	
 
 		</form:form>
 
