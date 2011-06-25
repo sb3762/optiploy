@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.optiploy.constants.Constants;
 import com.optiploy.model.Function;
 import com.optiploy.service.FunctionService;
 import com.optiploy.web.listener.StartupListener;
@@ -36,7 +37,7 @@ public class FunctionController extends BaseFormController
 	{	
 		locale = request.getLocale();
 		
-		if (request.getParameter("cancel") != null) 
+		if (request.getParameter(Constants.MODE_CANCEL) != null) 
 		{
 			saveMessage(request, getText("errors.cancel","", locale));
 			
@@ -54,35 +55,29 @@ public class FunctionController extends BaseFormController
 				
 		Function function = (Function) command;
 		locale = request.getLocale(); 
+		StartupListener.setupContext(request.getSession().getServletContext());
 		
-		if (request.getParameter("delete") != null) 
+		if (request.getParameter(Constants.MODE_DELETE) != null) 
 		{	
-			functionService.remove(function);
-			
-			StartupListener.setupContext(request.getSession().getServletContext());
+			functionService.remove(function);			
 
 			saveMessage(request, getText("function.deleted", function.getName(), locale));
 			
 			return new ModelAndView(getSuccessView());
         } 
 		else 
-		{
-		
-			if(mode.equalsIgnoreCase("update"))
+		{		
+			if(mode.equalsIgnoreCase(Constants.MODE_UPDATE))
 			{	
 				functionService.update(function);
-				
-				StartupListener.setupContext(request.getSession().getServletContext());
 	
 				saveMessage(request, getText("function.saved", function.getName(), locale));
 				
 				return new ModelAndView(getSuccessView());
 			}
-			else if(mode.equalsIgnoreCase("add"))
+			else if(mode.equalsIgnoreCase(Constants.MODE_ADD))
 			{	
 				functionService.insert(function);
-								
-				StartupListener.setupContext(request.getSession().getServletContext());
 				
 				saveMessage(request, getText("function.added", function.getName(), locale));
 				
@@ -104,16 +99,16 @@ public class FunctionController extends BaseFormController
 	{
 		Function function = (Function) super.formBackingObject(request);
 		
-		if(request.getParameter("mode") != null)
+		if(request.getParameter(Constants.MODE) != null)
 		{	
-			mode = request.getParameter("mode");
+			mode = request.getParameter(Constants.MODE);
 		}	
 					
-		if(mode.equalsIgnoreCase("add"))
+		if(mode.equalsIgnoreCase(Constants.MODE_ADD))
 		{
 			function = new Function();						
 		}
-		else if(mode.equalsIgnoreCase("update"))
+		else if(mode.equalsIgnoreCase(Constants.MODE_UPDATE))
 		{
 			function = (Function) functionService.findById(Integer.parseInt(request.getParameter("id")));
 		}		
@@ -123,7 +118,7 @@ public class FunctionController extends BaseFormController
 	
 	protected void onBind(HttpServletRequest request, Object command)throws Exception 
 	{
-		if (request.getParameter("delete") != null) 
+		if (request.getParameter(Constants.MODE_DELETE) != null) 
 		{
             super.setValidateOnBinding(false);
         } 
