@@ -16,3 +16,7 @@ Username: admin | Password: admin
 
 Still have to work on the job page but to do a sample build, go to Job Actions/Job List/Pick job and click small build icon.  Going to flesh this out over the next week.  My kids permitting...
 
+
+
+* I don't know if anyone is even reading this yet since this application isn't fully functional but this application's foundation is based upon AppFuse.  Many thanks to Matt Raible for awesome code.
+
