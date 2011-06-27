@@ -78,7 +78,9 @@
     </bean>
     
     <bean name="buildController" class="com.optiploy.web.controller.BuildController">      	
-    	<property name="buildApplication" ref="buildApplication" />    	
+    	<property name="buildApplication" ref="buildApplication" /> 
+    	<property name="agentService" ref="agentService" />
+    	<property name="jobService" ref="jobService" />   	
     </bean>
     
     <bean name="environmentController" class="com.optiploy.web.controller.EnvironmentController" >
