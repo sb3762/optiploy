@@ -15,7 +15,7 @@ import com.optiploy.model.Agent;
 public class AgentDaoImpl extends HibernateDaoSupport implements AgentDao
 {
 
-	public Object findById(int id)
+	public Agent findById(int id)
 	{	
 		List list = getHibernateTemplate().find("from Agent where id=?",id);
 		return (Agent) list.get(0);
