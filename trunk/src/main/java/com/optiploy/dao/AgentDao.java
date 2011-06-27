@@ -12,9 +12,9 @@ import com.optiploy.model.Agent;
  */
 public interface AgentDao
 {
-	Object findById(int id);
+	Agent findById(int id);
     void insert(Object object);
-    Object merge(Object object);
+    Agent merge(Object object);
     void update(Object object);
     void remove(Object object);
     
