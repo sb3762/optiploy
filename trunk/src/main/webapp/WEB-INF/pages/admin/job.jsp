@@ -36,7 +36,7 @@
 	   			</tr>
 	   			<tr>
 	   				<th align="left"><fmt:message key="jobForm.actions"/></th>
-	   				<td align="left"><a href="/buildController.do?jobId=${param.id}"><fmt:message key="jobForm.build"/></a></td>
+	   				<td align="left"><div id="build"><a href="javascript:startBuild(${param.id})"><fmt:message key="jobForm.build"/></a></div></td>
 	   			</tr>
 	   		</table>
 	   		

@@ -136,4 +136,10 @@
     {
     	history.back()
     }
+    
+    function startBuild(id)
+    {
+    	document.getElementById('build').innerHTML = '<img src="/images/progress.gif">';
+      	window.location = "/buildController.do?jobId=" + id;
+    }
 </script>
