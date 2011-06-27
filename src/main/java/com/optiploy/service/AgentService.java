@@ -10,7 +10,7 @@ import com.optiploy.model.Agent;
  */
 public interface AgentService
 {
-	Object findById(int id);
+	Agent findById(int id);
     void insert(Object object);
     Agent merge(Object object);
     void update(Object object);
