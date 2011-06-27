@@ -14,7 +14,7 @@ public class AgentServiceImpl implements AgentService
 {
 	AgentDao agentDao;
 
-	public Object findById(int id)
+	public Agent findById(int id)
 	{
 		return agentDao.findById(id);
 	}
