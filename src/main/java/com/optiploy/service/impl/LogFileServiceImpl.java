@@ -42,4 +42,9 @@ public class LogFileServiceImpl implements LogFileService
         this.logFileDao = logFileDao;
     }
 
+	public LogFile findByLogId(int logId)
+	{
+		return (LogFile)logFileDao.findByLogId(logId);
+	}
+
 }

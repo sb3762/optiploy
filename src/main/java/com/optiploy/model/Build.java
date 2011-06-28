@@ -4,6 +4,7 @@ public class Build
 {
 
 	private int jobId;
+	private int logId;
 	private String jobName;
 	private String jobDecription;
 	private String processingAgent;
@@ -20,6 +21,14 @@ public class Build
 	public void setJobId(int jobId)
 	{
 		this.jobId = jobId;
+	}
+	public void setLogId(int logId)
+	{
+		this.logId = logId;
+	}
+	public int getLogId()
+	{
+		return logId;
 	}
 	public String getJobName()
 	{
@@ -84,9 +93,5 @@ public class Build
 	public void setSuccess(boolean success)
 	{
 		this.success = success;
-	}
-	
-	
-	
-	
+	}	
 }

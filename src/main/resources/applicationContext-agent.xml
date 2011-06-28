@@ -273,8 +273,6 @@
   
   <bean id="optiployProperties" class="com.optiploy.property.OptiployProperties" />
   
-  <bean id="generalUtil" class="com.optiploy.util.GeneralUtil" />
-  
   <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
     
 </beans>

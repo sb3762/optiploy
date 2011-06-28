@@ -31,6 +31,10 @@
 			<th align="left"><fmt:message key="buildForm.build.messages"/></th>
 			<th align="left"><form:textarea disabled="true" path="buildMessages" id="buildMessages"/></th>										
 		</tr>
+		<tr>
+			<th align="left"><fmt:message key="buildForm.logFile"/></th>
+			<th align="left"><a href="/logFileController.do?logId=${build.logId}">Download</a></th>											
+		</tr>
 </table>		
 
 </form:form>

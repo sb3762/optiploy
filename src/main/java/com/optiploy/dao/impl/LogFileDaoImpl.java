@@ -39,6 +39,12 @@ public class LogFileDaoImpl extends HibernateDaoSupport implements LogFileDao
 	{
 		getHibernateTemplate().update((LogFile)object);	
 	}
+
+	public Object findByLogId(int logId)
+	{
+		List list = getHibernateTemplate().find("from LogFile where logId=?",logId);
+		return (LogFile) list.get(0);
+	}
 	
 
 }

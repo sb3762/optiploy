@@ -13,4 +13,6 @@ public interface LogFileDao
     void update(Object object);
     void remove(Object object);
     
+    Object findByLogId(int logId);
+    
 }
