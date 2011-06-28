@@ -89,6 +89,7 @@ private static Logger logger = Logger.getLogger(BuildController.class);
 				build = new Build();
 				
 				build.setJobId(jobId);
+				build.setLogId(log.getId());
 				build.setJobName(job.getName());
 				build.setJobDecription(job.getDescription());
 				build.setProcessingAgent(agentName);

@@ -19,6 +19,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -65,7 +66,6 @@ public class BuildInstance extends Thread
 	private ProgressService progressService = (ProgressService)applicationContext.getBean("progressService");
 	private RuleService ruleService = (RuleService)applicationContext.getBean("ruleService");
 	private OptiployProperties optiployProperties = (OptiployProperties)applicationContext.getBean("optiployProperties");
-	private GeneralUtil generalUtil = (GeneralUtil)applicationContext.getBean("generalUtil");
 	
 	private Property propertyVersion = propertyService.getPropertyByPropertyName(Constants.VERSION);
 	private Property propertyServletURL = propertyService.getPropertyByPropertyName(Constants.SERVLET_URL);
@@ -229,7 +229,7 @@ public class BuildInstance extends Thread
 	            }
 	            
 	            logger.debug("Sending response packet."); 
-	            generalUtil.loopThroughHashmap(response.getParameters(), null);            
+	            GeneralUtil.loopThroughHashmap(response.getParameters(), null);            
 	            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 	            out.writeObject(response);
 	        }
@@ -306,7 +306,7 @@ public class BuildInstance extends Thread
 	        // Archive the log file
 	        LogFile logFile = new LogFile();
 	        logFile.setLogId(logId);
-	        logFile.setLogFile(generalUtil.getBytesFromFile(zipLogFile));
+	        logFile.setLogFile(Hibernate.createBlob(GeneralUtil.getBytesFromFile(zipLogFile)));
 	        logFileService.insert(logFile);
 	    } 
 	    catch (ValidationException e)
@@ -357,10 +357,10 @@ public class BuildInstance extends Thread
     	
     	logger.info("Job Name: " + job.getName());
 				
-		//if(GeneralUtil.isWindows())
+		if(GeneralUtil.isWindows())
 			makeFileName = propertyMakeFileWindows.getValue();
-		//else if(GeneralUtil.isUnix())
-			//makeFileName = propertyMakeFileUnix.getValue();
+		else if(GeneralUtil.isUnix())
+			makeFileName = propertyMakeFileUnix.getValue();
 					
 		makeFile = new File(instancePath, makeFileName);
 		
@@ -562,7 +562,7 @@ public class BuildInstance extends Thread
                 out.flush();
                 out.close();
                 
-                logger.debug("Script output: " + generalUtil.replaceAttributes(script, attributeMap));
+                logger.debug("Script output: " + GeneralUtil.replaceAttributes(script, attributeMap));
             }
            
             if (label != null)

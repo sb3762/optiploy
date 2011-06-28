@@ -1,5 +1,8 @@
 package com.optiploy.model;
 
+import java.io.File;
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +20,7 @@ public class LogFile
 {
 	private int id;
 	private int logId;
-	private byte[] logFile;
+	private Blob logFile;
 	
 	public LogFile()
 	{
@@ -46,13 +49,13 @@ public class LogFile
 		return logId;
 	}
 	
-	public void setLogFile(byte[] logFile)
+	public void setLogFile(Blob logFile)
 	{
 		this.logFile = logFile;
 	}
 	
 	@Lob
-	public byte[] getLogFile()
+	public Blob getLogFile()
 	{
 		return logFile;
 	}

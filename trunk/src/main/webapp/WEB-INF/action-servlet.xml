@@ -15,6 +15,7 @@
                 /environmentController.do=environmentController
                 /functionController.do=functionController
                 /jobController.do=jobController
+                /logFileController.do=logFileController
                 /roleController.do=roleController
                 /releaseController.do=releaseController
                 /reloadController.do=reloadController
@@ -106,6 +107,10 @@
         <property name="validator" ref="beanValidator" />        
         <property name="jobService" ref="jobService" />       
     </bean>  
+    
+    <bean name="logFileController" class="com.optiploy.web.controller.LogFileController">    	
+    	<property name="logFileService" ref="logFileService" />
+    </bean>
     
     <bean name="lookupController" class="com.optiploy.web.controller.LookupController">    	
     	<property name="lookupManager" ref="lookupManager" />

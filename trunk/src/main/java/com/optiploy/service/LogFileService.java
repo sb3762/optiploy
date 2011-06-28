@@ -13,4 +13,6 @@ public interface LogFileService
     LogFile merge(Object object);
     void update(Object object);
     void remove(Object object);
+    
+    LogFile findByLogId(int logId);
 }
