@@ -67,7 +67,8 @@
         <property name="successView" value="home"/>
         <property name="cancelView" value="home"/>
         <property name="validator" ref="beanValidator" />        
-        <property name="agentService" ref="agentService" />       
+        <property name="agentService" ref="agentService" /> 
+        <property name="agentApplication" ref="agentApplication" />       
     </bean>
 
 	<bean name="applicationController" class="com.optiploy.web.controller.ApplicationController" >
