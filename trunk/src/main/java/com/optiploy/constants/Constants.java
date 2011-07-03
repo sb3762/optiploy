@@ -384,6 +384,11 @@ public class Constants
     public static final String REQUEST_TYPE_SHUTDOWN = "shutdown";
     
     /**
+     * Request refresh instances
+     */
+    public static final String REQUEST_REFRESH_INSTANCES = "refreshInstances";
+    
+    /**
      * Modes
      */
     public static final String MODE = "mode";

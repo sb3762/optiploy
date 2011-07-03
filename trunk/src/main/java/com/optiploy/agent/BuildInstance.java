@@ -122,14 +122,15 @@ public class BuildInstance extends Thread
         
         try
         {
-        	ServerSocket server = new ServerSocket(instance.getPort());
+        	ServerSocket server = new ServerSocket(instance.getPort());        	
         	
         	while (!shutdown)
         	{
 	        
-	        	Socket socket = server.accept();
+	        	socket = server.accept();
 	        	
-	            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+	        	ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+	            
 	            Packet request = (Packet) in.readObject();
 	            
 	            logger.debug("Received request packet: " + request.getRequestType());
@@ -232,6 +233,9 @@ public class BuildInstance extends Thread
 	            GeneralUtil.loopThroughHashmap(response.getParameters(), null);            
 	            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 	            out.writeObject(response);
+	            
+	            out.close();
+	            in.close();
 	        }
         }	
         catch (IOException e)
@@ -246,7 +250,7 @@ public class BuildInstance extends Thread
         {
             try
             {
-                socket.close();
+                socket.close(); 
             }
 
             catch (IOException e)
@@ -276,7 +280,9 @@ public class BuildInstance extends Thread
     }
     
     public void startBuild() throws InstanceBusyException, InstanceDirectoryException, OptiployException, LowDiskException, DataNotFoundException
-	{    
+	{  
+    	stopBuild = false;
+    	
     	updateBuildStatus(Constants.BUILD_STATUS_STARTING, "AGENT: Build starting...");		
     	
     	instancePath = directory + instance.getId();
@@ -376,7 +382,8 @@ public class BuildInstance extends Thread
         BufferedReader in = new BufferedReader(new InputStreamReader(buildProc.getInputStream()));
 
         // Start the timeout thread
-        new AgentTimoutThread().start();
+        AgentTimoutThread agentTimeoutThread = new AgentTimoutThread();
+        agentTimeoutThread.start();
 
         // Create the output stream for the log file
         PrintWriter logOut = new PrintWriter(new FileOutputStream(rawLogFile));
@@ -393,7 +400,7 @@ public class BuildInstance extends Thread
 		}	
 						
         while ((line = in.readLine()) != null && !stopBuild)
-        {
+        {	
             lastLine = new Date();
             logOut.println(line);
             logOut.flush();
@@ -455,15 +462,18 @@ public class BuildInstance extends Thread
                 buildMessage = "Build failed. See build log for details.";
             }
         }
-
+        
         buildProc.destroy();
+        stdErrReader.interrupt();
+        agentTimeoutThread.interrupt();
         logOut.flush();
         logOut.close();
+        in.close();
 
         FileInputStream logIn = new FileInputStream(rawLogFile);
         ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream(zipLogFile));
         zipOut.putNextEntry(new ZipEntry("output.txt"));
-        GeneralUtil.pipeInputStream(logIn, zipOut, 512, true);
+        GeneralUtil.pipeInputStream(logIn, zipOut, 512, true);        
     }
     
     private void stopBuild()
