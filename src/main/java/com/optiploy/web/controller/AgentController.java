@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.optiploy.application.AgentApplication;
 import com.optiploy.constants.Constants;
 import com.optiploy.model.Agent;
 import com.optiploy.service.AgentService;
@@ -22,6 +23,7 @@ public class AgentController extends BaseFormController
 	
 	private String mode;	
 	private AgentService agentService;
+	private AgentApplication agentApplication;
 	private Locale locale;
 	
 	public AgentController()
@@ -70,7 +72,9 @@ public class AgentController extends BaseFormController
 		
 			if(mode.equalsIgnoreCase(Constants.MODE_UPDATE))
 			{					
-				agentService.update(agent);				
+				agentService.update(agent);	
+				
+				agentApplication.refreshInstances(agent.getId());
 	
 				saveMessage(request, getText("agent.saved", agent.getName(), locale));
 				
@@ -131,6 +135,12 @@ public class AgentController extends BaseFormController
 	public void setAgentService(AgentService agentService)
 	{
 		this.agentService = agentService;
+	}
+	
+	@Required
+	public void setAgentApplication(AgentApplication agentApplication)
+	{
+		this.agentApplication = agentApplication;
 	}
 	
 }

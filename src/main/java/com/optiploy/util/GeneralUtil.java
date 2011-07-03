@@ -2,6 +2,7 @@ package com.optiploy.util;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
+import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -292,6 +294,43 @@ public class GeneralUtil
 		
 		return result;
 	}
+    
+    public static int[] nextOpenPort(int startPortRange, int stopPortRange, int numberOfPorts)
+    {
+    	int ports[] = new int[numberOfPorts];
+    	
+    	int portCounter = 0;
+    	
+    	for(int i=startPortRange;i<=stopPortRange;i++)
+    	{
+    		try
+    		{
+    			logger.debug("Checking port: " + i);
+    			
+    			Socket socket = new Socket("127.0.0.1",i);
+    			
+    			socket.close();
+    		}
+    		catch(EOFException e)
+    		{
+    			// Do nothing, go on to next port
+    		}
+    		catch(IOException e)
+    		{
+    			logger.debug("Open port: " + i);
+    			
+    			ports[portCounter] = i;
+    		}
+    		
+    		portCounter++;
+    		
+    		if(portCounter >= numberOfPorts)
+    			break;
+    		
+    	}
+    	
+    	return ports;    	
+    }
     
 	public static boolean isWindows()
     {

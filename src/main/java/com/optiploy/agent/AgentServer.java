@@ -6,8 +6,12 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +27,7 @@ import com.optiploy.property.OptiployProperties;
 import com.optiploy.service.AgentService;
 import com.optiploy.service.InstanceService;
 import com.optiploy.service.PropertyService;
+import com.optiploy.util.GeneralUtil;
 
 
 public class AgentServer
@@ -41,8 +46,15 @@ public class AgentServer
 	private static PropertyService propertyService = (PropertyService)applicationContext.getBean("propertyService");
 	
 	private static Property propertyServerVersion = propertyService.getPropertyByPropertyName(Constants.VERSION);
+	private static Property propertyLocalTest = propertyService.getPropertyByPropertyName(Constants.ADMIN_LOCAL_TEST);
 	
 	private static OptiployProperties optiployProperties = (OptiployProperties)applicationContext.getBean("optiployProperties");
+	
+	private static List<BuildInstance> instances = new ArrayList<BuildInstance>();
+	private static BuildInstance buildInstance;
+	
+	
+	
 		
 	
 	public static void main(String[] args) throws OptiployException
@@ -155,12 +167,15 @@ public class AgentServer
 		try
 		{			
 			instanceService.deleteAllInstances(agent.getId(), agent.getName());
+						
+			int ports[] = GeneralUtil.nextOpenPort((agent.getPort()+1),(agent.getPort()+100),agent.getInstances());
+			
 			
 			for(int i = 0; i < agent.getInstances(); i++)
 			{
 				instance = new Instance();
 				instance.setAgentId(agent.getId());
-				instance.setPort(agent.getPort() + (i + 1));
+				instance.setPort(ports[i]);
 				instance.setStatus(Constants.INSTANCE_STATUS_READY);
 				
 				if(priority.equalsIgnoreCase("Order"))
@@ -178,7 +193,11 @@ public class AgentServer
 				
 				instance = instanceService.merge(instance);
 				
-				new BuildInstance(instance, agent).start();
+				buildInstance = new BuildInstance(instance, agent);
+				
+				buildInstance.start();
+				
+				instances.add(buildInstance);
 			}	
 			
 		}
@@ -190,6 +209,19 @@ public class AgentServer
 	
 	private static void destroyInstances()
 	{
+			Iterator<BuildInstance> itr = instances.iterator();
+			
+			while(itr.hasNext())
+			{
+				itr.next().interrupt();
+				logger.debug("Destroyed instance");				
+			}
+			
+			instances.clear();
+			
+			
+			
+		/*
 		try
 		{
 			List<Instance> instances = instanceService.getReadyInstances();
@@ -200,7 +232,12 @@ public class AgentServer
 			{
 				Instance instance = (Instance)it.next();
 				
-				Socket socket = new Socket("127.0.0.1", instance.getPort());
+				Socket socket;
+				
+				if(propertyLocalTest.getValue().equals("true"))
+					socket = new Socket("127.0.0.1", instance.getPort());
+            	else
+            		socket = new Socket(agent.getAddress(), instance.getPort());
 				
 				Packet request = new Packet();            	
 	        	
@@ -227,6 +264,8 @@ public class AgentServer
 		{
 			logger.error("Error shutting down threads",e);
 		}
+		
+		*/
 		
 	}
 	
