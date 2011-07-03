@@ -33,6 +33,10 @@
 	   				<th align="left"><fmt:message key="agentForm.description"/></th> 
 					<th align="left"><form:errors path="description" cssClass="fieldError"/><form:input path="description" id="description" cssClass="fieldError"/></th>
 	   			</tr>
+	   			<tr>	
+	   				<th align="left"><fmt:message key="agentForm.instances"/></th> 
+					<th align="left"><form:errors path="instances" cssClass="fieldError"/><form:input path="instances" id="instances" cssClass="fieldError"/></th>
+	   			</tr>
 	   			<tr>
 	   				<th align="left"><fmt:message key="agentForm.status"/></th>  
 					<th align="left"><form:errors path="status" cssClass="fieldError"/><form:input disabled="true" path="status" id="status" cssClass="fieldError" /></th> 
