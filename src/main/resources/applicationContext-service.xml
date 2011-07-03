@@ -238,6 +238,10 @@
     	<property name="logService" ref="logService" /> 
     	<property name="buildMonitor" ref="buildMonitor" />
   </bean> 
+  
+  <bean id="agentApplication" class="com.optiploy.application.AgentApplication"> 
+        <property name="agentService" ref="agentService" />
+  </bean>
      
   	
 </beans>
