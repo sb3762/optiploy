@@ -13,6 +13,7 @@
     
     <display:column property="name" escapeXml="true" sortable="true" titleKey="agentForm.name" url="/agentController.do?mode=update" paramId="id" paramProperty="id"/>
     <display:column property="description" escapeXml="true" sortable="true" titleKey="agentForm.description" />
+    <display:column property="instances" escapeXml="true" sortable="true" titleKey="agentForm.instances" />
     <display:column property="status" escapeXml="true" sortable="true" titleKey="agentForm.status" />
     <display:column property="priority" escapeXml="true" sortable="true" titleKey="agentForm.priority" />
     <display:column property="address" escapeXml="true" sortable="true" titleKey="agentForm.address" />
