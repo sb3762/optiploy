@@ -74,7 +74,7 @@ public class AgentController extends BaseFormController
 			{					
 				agentService.update(agent);	
 				
-				agentApplication.refreshInstances(agent.getId());
+				agentApplication.restartInstances(agent.getId());
 	
 				saveMessage(request, getText("agent.saved", agent.getName(), locale));
 				
