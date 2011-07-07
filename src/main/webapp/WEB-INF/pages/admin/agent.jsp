@@ -22,7 +22,7 @@
 
 		<c:if test="${param.mode == 'update' or param.mode == 'add'}">				
 		<center>
-			<fmt:message key="jobForm.admin.message"/>
+			<fmt:message key="agentForm.admin.message"/>
 			<br>
 			<table class="table">
 	   			<tr>
