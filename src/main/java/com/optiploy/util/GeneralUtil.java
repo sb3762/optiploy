@@ -295,8 +295,10 @@ public class GeneralUtil
 		return result;
 	}
     
-    public static int[] nextOpenPort(int startPortRange, int stopPortRange, int numberOfPorts)
+    public static int[] openPorts(int startPortRange, int stopPortRange, int numberOfPorts)
     {
+    	logger.debug("Checking for " + numberOfPorts + " open ports");
+    	
     	int ports[] = new int[numberOfPorts];
     	
     	int portCounter = 0;
@@ -320,9 +322,9 @@ public class GeneralUtil
     			logger.debug("Open port: " + i);
     			
     			ports[portCounter] = i;
-    		}
-    		
-    		portCounter++;
+    			
+    			portCounter++;
+    		}    		
     		
     		if(portCounter >= numberOfPorts)
     			break;
