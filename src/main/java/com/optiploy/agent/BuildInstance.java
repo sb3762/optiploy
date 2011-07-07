@@ -1,6 +1,7 @@
 package com.optiploy.agent;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -237,7 +238,11 @@ public class BuildInstance extends Thread
 	            out.close();
 	            in.close();
 	        }
-        }	
+        }
+        catch(EOFException e)
+		{
+        	// Do nothing
+		}
         catch (IOException e)
 		{
         	logger.error("IOException", e);
@@ -546,8 +551,7 @@ public class BuildInstance extends Thread
     private void outputScripts() throws DataNotFoundException, InstanceDirectoryException, ValidationException, IOException
     {   
     	String label = (String) attributeMap.get(Constants.BUILD_LABEL);
-        File file = null;
-        File path = new File(instancePath);   
+        File file = null;   
         
         logger.debug("Making directory: " + instancePath); 
         
