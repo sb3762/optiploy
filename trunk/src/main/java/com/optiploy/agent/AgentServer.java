@@ -7,11 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -36,9 +33,6 @@ public class AgentServer
 	
 	public static boolean shutdown = false;
 	
-	private static Agent agent;
-	private static Instance instance;
-	
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-agent.xml");
 	
 	private static AgentService agentService = (AgentService)applicationContext.getBean("agentService");
@@ -62,20 +56,22 @@ public class AgentServer
 		try
 		{		
 			String host = InetAddress.getLocalHost().getHostName();
-			String address = InetAddress.getLocalHost().getHostAddress();				
+			String address = InetAddress.getLocalHost().getHostAddress();	
+			
+			Agent agent = null;
 			
 			try
-			{
-				agentService.getAgentByAgentName(host);
-				
+			{				
 				logger.debug("Agent already in the database.  Updating information: " + host);
 				
 				agent = agentService.getAgentByAgentName(host);
+				
 				agent.setDescription(optiployProperties.getPropertyValue(Constants.AGENT_DECRIPTION));
 				agent.setAddress(address);
 				agent.setPort(Integer.parseInt(optiployProperties.getPropertyValue(Constants.AGENT_PORT)));
 				agent.setVersion(optiployProperties.getPropertyValue(Constants.VERSION));
 				agent.setStatus(Constants.AGENT_STATUS_RUNNING);
+				
 				agentService.update(agent);	
 				
 				logger.debug("Existing agent updated: " + host);
@@ -113,7 +109,7 @@ public class AgentServer
 				System.exit(0);
 			}		
 			
-			createInstances();	
+			createInstances(agent.getId());	
 			
 			try
 	        {
@@ -121,31 +117,50 @@ public class AgentServer
 				Socket socket;
 				
 				ObjectInputStream in;
+				ObjectOutputStream out;
 				Packet request;
-				Packet response;
-		            
-	            logger.info("Server waiting for connection");			
+				Packet response;            			
 
 	            while (!shutdown)
 	            {
+	            	logger.info("Server waiting for connection");
+	            	
 	                socket = server.accept();
 	                logger.info("Connection made to agent...");
 	                
 	                in = new ObjectInputStream(socket.getInputStream());
-	                request = (Packet) in.readObject();
+	                out = new ObjectOutputStream(socket.getOutputStream());
 	                
-	                if(request.getRequestType().equals(Constants.AGENT_HARD_STOP))
+	                request = (Packet) in.readObject();	 
+	                response = new Packet();	                
+	               
+	                if(request.getRequestType().equals(Constants.AGENT_START_INSTANCES))
+	                {
+	                	createInstances(agent.getId());
+	                	response.setParameter(Constants.AGENT_STATUS_RUNNING, Boolean.TRUE);
+	                }
+	                else if(request.getRequestType().equals(Constants.AGENT_STOP_INSTANCES))
 	                {
 	                	destroyInstances();
+	                	response.setParameter(Constants.AGENT_STATUS_INSTANCES_DOWN, Boolean.TRUE);
 	                }
-	                else if(request.getRequestType().equals(Constants.AGENT_START_INSTANCES))
+	                else if(request.getRequestType().equals(Constants.AGENT_RESTART_INSTANCES))
 	                {
 	                	destroyInstances();
-	                	createInstances();
+	                	createInstances(agent.getId());
+	                	response.setParameter(Constants.AGENT_STATUS_RUNNING, Boolean.TRUE);
 	                }
+	                else if(request.getRequestType().equals(Constants.AGENT_HARD_STOP))
+	                {
+	                	destroyInstances();
+	                	shutdownAgent();
+	                	response.setParameter(Constants.AGENT_STATUS_DOWN, Boolean.TRUE);
+	                }	                
 	                
-	                response = new Packet();
 	                response.setRequestType(request.getRequestType());
+	                
+	                logger.debug("Sending response packet: " + request.getRequestType());
+	                out.writeObject(response);
 	            }		
 	        }
 	        catch(Exception e)
@@ -160,20 +175,22 @@ public class AgentServer
 		}	
     }
 	
-	private static void createInstances()
+	private static void createInstances(int agentId)
 	{
+		Agent agent = agentService.findById(agentId);
+		
 		String priority = optiployProperties.getPropertyValue("Priority");
 		
 		try
 		{			
 			instanceService.deleteAllInstances(agent.getId(), agent.getName());
 						
-			int ports[] = GeneralUtil.nextOpenPort((agent.getPort()+1),(agent.getPort()+100),agent.getInstances());
+			int ports[] = GeneralUtil.openPorts((agent.getPort()+1),(agent.getPort()+100),agent.getInstances());
 			
 			
 			for(int i = 0; i < agent.getInstances(); i++)
 			{
-				instance = new Instance();
+				Instance instance = new Instance();
 				instance.setAgentId(agent.getId());
 				instance.setPort(ports[i]);
 				instance.setStatus(Constants.INSTANCE_STATUS_READY);
@@ -217,56 +234,14 @@ public class AgentServer
 				logger.debug("Destroyed instance");				
 			}
 			
-			instances.clear();
-			
-			
-			
-		/*
-		try
-		{
-			List<Instance> instances = instanceService.getReadyInstances();
-			
-			Iterator it = instances.iterator();
-			
-			while(it.hasNext())
-			{
-				Instance instance = (Instance)it.next();
-				
-				Socket socket;
-				
-				if(propertyLocalTest.getValue().equals("true"))
-					socket = new Socket("127.0.0.1", instance.getPort());
-            	else
-            		socket = new Socket(agent.getAddress(), instance.getPort());
-				
-				Packet request = new Packet();            	
-	        	
-	        	request.setRequestType(Constants.REQUEST_TYPE_SHUTDOWN);
-	        	request.setParameter(Constants.AGENT_HARD_STOP, "true");
-	        	ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-
-	        	System.out.println("Sending instance shutdown packet: " + request.getRequestType());
-	            out.writeObject(request);
-
-	            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-	            Packet response = (Packet) in.readObject();
-	            System.out.println("Received response packet: ");
-			}
-			
-			for(int i = 0; it.hasNext(); i++)
-			{
-				
-			}
-			
-			logger.info("All instances shutdown");
-		} 
-		catch (Exception e)
-		{
-			logger.error("Error shutting down threads",e);
-		}
+			instances.clear();		
+	}
+	
+	private static void shutdownAgent()
+	{
+		logger.error("Shutting down agent");
 		
-		*/
-		
+		System.exit(0);
 	}
 	
 }

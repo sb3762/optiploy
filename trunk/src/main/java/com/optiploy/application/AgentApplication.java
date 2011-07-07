@@ -25,7 +25,7 @@ public class AgentApplication
 		
 	}
 	
-	public void refreshInstances(int agentId)
+	public void restartInstances(int agentId)
 	{
 		Socket socket = null;
 		
@@ -37,7 +37,7 @@ public class AgentApplication
         	
         	Packet request = new Packet();            	
         	
-        	request.setRequestType(Constants.AGENT_START_INSTANCES);
+        	request.setRequestType(Constants.AGENT_RESTART_INSTANCES);
         	        	
         	ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 

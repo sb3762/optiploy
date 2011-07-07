@@ -234,6 +234,11 @@ public class Constants
     public static final String AGENT_STATUS_DOWN = "Down";
     
     /**
+     * Agent instances down status
+     */
+    public static final String AGENT_STATUS_INSTANCES_DOWN = "InstancesDown";
+    
+    /**
      * Agent shutdown status
      */
     public static final String AGENT_STATUS_SHUTDOWN = "Shutdown";
@@ -287,6 +292,16 @@ public class Constants
      * Agent startInstances
      */
     public static final String AGENT_START_INSTANCES = "startInstances";
+    
+    /**
+     * Agent stopInstances
+     */
+    public static final String AGENT_STOP_INSTANCES = "stopInstances";
+    
+    /**
+     * Agent restartInstances
+     */
+    public static final String AGENT_RESTART_INSTANCES = "restartInstances";
     
     /**
      * Agent clean up file
